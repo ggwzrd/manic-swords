@@ -16,6 +16,13 @@ const swordSchema = new Schema({
   }
 })
 
+const levelSchema = new Schema({
+  title: { type: String, required: false },
+  current: { type: Boolean, required: true, 'default': false },
+  speed: {type: Number, required: true, 'default': 1},
+  amount: {type: Number, required: true, 'default': 5},
+})
+
 const playerSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: 'user' },
   color: { type: String, required: false },
@@ -32,7 +39,7 @@ const gameSchema = new Schema({
   swords: [swordSchema],
   players: [playerSchema],
   started: { type: Boolean, required: true, 'default': false },
-  level: { type: Number, required: true, 'default': 1 },
+  levels: [levelSchema],
   winner: { type: Number, required: false },
   createdAt: { type: Date, 'default': Date.now },
   updatedAt: { type: Date, 'default': Date.now },

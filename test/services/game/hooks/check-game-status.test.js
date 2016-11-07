@@ -1,9 +1,9 @@
 'use strict';
 
 const assert = require('assert');
-const createGame = require('../../../../src/services/game/hooks/create-game.js');
+const checkGameStatus = require('../../../../src/services/game/hooks/check-game-status.js');
 
-describe('game createGame hook', function() {
+describe('game checkGameStatus hook', function() {
   it('hook can be used', function() {
     const mockHook = {
       type: 'before',
@@ -13,8 +13,8 @@ describe('game createGame hook', function() {
       data: {}
     };
 
-    createGame()(mockHook);
+    checkGameStatus()(mockHook);
 
-    assert.ok(mockHook.createGame);
+    assert.ok(mockHook.checkGameStatus);
   });
 });
