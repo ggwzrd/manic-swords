@@ -31,7 +31,7 @@
     "feathers-configuration": "^0.2.3",
     "feathers-errors": "^2.4.0",
     "feathers-hooks": "^1.5.7",
-    "feathers-mongoose": "^3.5.2",
+    "feathers-mongoose": "^3.5.3",
     "feathers-rest": "^1.4.4",
     "feathers-socketio": "^1.4.1",
     "feathersjs-redux-model": "github:codaisseur/feathersjs-redux-model",
