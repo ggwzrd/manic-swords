@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react'
+import Title from '../components/Title'
 
 class Home extends Component {
   render() {
     return(
       <div className="home">
-        <h1>Welcome, Stranger!</h1>
+        <Title label="Manic Swords" />
       </div>
     )
   }

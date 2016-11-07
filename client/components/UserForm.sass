@@ -1,0 +1,66 @@
+.registration-form
+  width: 400px
+  height: auto
+  padding: 10px
+  color: rgb(252, 145, 105)
+  display: flex
+  justify-content: center
+  align-items: center
+  flex-wrap: wrap
+  margin: auto
+
+  div
+    width: 100%
+    font-size: 16px
+    font-weight: lighter
+
+    hr
+      border-color: rgb(254, 140, 22) !important
+
+    input
+      color: inherit !important
+      transition: 0.2s
+
+    label
+      color: inherit !important
+
+  .controls
+    display: flex
+    align-items: center
+    justify-content: center
+    flex-wrap: wrap
+    margin-top: 20px
+    width: auto
+    float: right
+
+    .submit
+      width: 100px
+      margin: 17px
+      margin-top: 10px
+      border: 1px solid rgb(191, 106, 18)
+
+    .sign-up button
+      background-color: rgb(254, 140, 22) !important
+
+.error
+  color: rgb(164, 28, 20) !important
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both
+  transform: translate3d(0, 0, 0)
+  backface-visibility: hidden
+  perspective: 1000px
+
+  @keyframes shake
+    10%, 90%
+      transform: translate3d(-1px, 0, 0)
+
+
+    20%, 80%
+      transform: translate3d(2px, 0, 0)
+
+
+    30%, 50%, 70%
+      transform: translate3d(-4px, 0, 0)
+
+
+    40%, 60%
+      transform: translate3d(4px, 0, 0)
