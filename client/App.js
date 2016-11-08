@@ -10,15 +10,6 @@ import './App.sass'
 
 class App extends Component {
 
-  componentWillMount(){
-    this.props.appLoading(true)
-  }
-
-  componentDidMount(){
-    const { appLoading } = this.props
-    setTimeout(() => appLoading(false), 1000)
-  }
-
   progress(completed) {
     if (completed > 100) {
       return 100

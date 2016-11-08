@@ -1,9 +1,20 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import appLoading from '../actions/loading'
 import Title from '../components/Title'
 
 
 class Home extends Component {
+
+  componentWillMount(){
+    this.props.appLoading(true)
+  }
+
+  componentDidMount(){
+    const { appLoading } = this.props
+    setTimeout(() => appLoading(false), 1000)
+  }
+
   render() {
     const { userName } = this.props
     return(
@@ -24,4 +35,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {})(Home)
+export default connect(mapStateToProps, { appLoading })(Home)
