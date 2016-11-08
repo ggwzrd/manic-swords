@@ -24,7 +24,7 @@ export default (user) => {
     .then((response) => {
       // response.data has the currentUser...
       dispatch(authenticateUser(response.data))
-      dispatch(userAuthenticated())
+      dispatch(userAuthenticated(response.data))
       dispatch(appLoading(false))
     })
     .catch((error) => {

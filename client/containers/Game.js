@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import Canvas from '../components/Canvas'
 
-class Game extends React.Component {
+class Game extends Component {
 
   render() {
     return (
