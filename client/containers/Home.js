@@ -8,7 +8,7 @@ class Home extends Component {
     const { userName } = this.props
     return(
       <div className="home">
-        <h2> Welcome, { userName ? userName : 'Stranger'} </h2>
+        <Title label={ userName ? "Welcome, "+userName : "Welcome, Stranger"} />
       </div>
     )
   }
