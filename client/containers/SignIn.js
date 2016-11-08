@@ -1,12 +1,14 @@
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 import UserForm from '../components/UserForm'
-import signInUser from '../actions/sign-in-user'
+import authenticateUser from '../actions/authenticate-user'
+import './SignIn.sass'
 
-class SignIn extends Component {
+export class SignIn extends Component {
 
   render() {
-    return <UserForm onSubmit={ signInUser } />
+    return <UserForm onSubmit={ this.props.authenticateUser } />
   }
 }
 
-export default SignIn
+export default connect(null, { authenticateUser })(SignIn)
