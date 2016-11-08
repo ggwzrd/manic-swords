@@ -48,7 +48,7 @@ class Header extends Component {
     return (
 
       <AppBar
-        title="MemoryGame"
+        title="Manic Swords"
         className="header"
         iconElementRight={ this.renderMenu() }
       />
