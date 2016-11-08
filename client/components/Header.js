@@ -15,7 +15,7 @@ import './Header.sass'
 
 class Header extends Component {
   renderMenu() {
-    const { destroySessionUser, userName, signedIn } = this.props
+    const { destroySessionUser, currentUser, signedIn } = this.props
 
     return (
       <IconMenu
@@ -24,15 +24,29 @@ class Header extends Component {
         }
         targetOrigin={{horizontal: 'right', vertical: 'top'}}
         anchorOrigin={{horizontal: 'right', vertical: 'top'}} >
-        <MenuItem primaryText={ signedIn ? userName : 'Sign in' } onClick={ this.signIn.bind(this) } />
+        <MenuItem primaryText={ signedIn ? currentUser.name : 'Sign in' } onClick={ this.signIn.bind(this) } />
         <MenuItem primaryText={ signedIn ? 'Sign out' : 'Sign up' } onClick={ this.signUpOrOut.bind(this) } />
       </IconMenu>
     )
   }
 
+  renderNav(){
+    const { currentUser } = this.props
+    return(
+      <IconMenu
+        iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+        anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+        targetOrigin={{horizontal: 'left', vertical: 'top'}}
+      >
+        <MenuItem primaryText="Home" onClick={ this.home } />
+        <MenuItem primaryText="Help" />
+      </IconMenu>
+    )
+  }
+
   signIn() {
-    const { signedIn } = this.props
-    if (signedIn) return
+    const { signedIn, currentUser } = this.props
+    if (signedIn) return history.push('/profile/'+ currentUser._id)
 
     history.push('/sign-in')
   }
@@ -44,12 +58,17 @@ class Header extends Component {
     history.push('/sign-up')
   }
 
+  home(){
+    history.push('/')
+  }
+
   render() {
     return (
 
       <AppBar
         title="Manic Swords"
         className="header"
+        iconElementLeft = {this.renderNav()}
         iconElementRight={ this.renderMenu() }
       />
     )
@@ -59,13 +78,13 @@ class Header extends Component {
 Header.propTypes = {
   destroySessionUser: PropTypes.func.isRequired,
   signedIn: PropTypes.bool.isRequired,
-  userName: PropTypes.string
+  currentUser: PropTypes.object
 }
 
 const mapStateToProps = (state) => {
   return {
     signedIn: !!state.currentUser._id,
-    userName: state.currentUser.name,
+    currentUser: state.currentUser,
   }
 }
 
