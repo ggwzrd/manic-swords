@@ -8,7 +8,6 @@ class Home extends Component {
     const { userName } = this.props
     return(
       <div className="home">
-        <Title label="Memory Game" />
         <h2> Welcome, { userName ? userName : 'Stranger'} </h2>
       </div>
     )

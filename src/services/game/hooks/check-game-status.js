@@ -15,13 +15,12 @@ module.exports = function(options) {
     const players = hook.data.players;
     const levels = hook.data.levels;
 
-    // check if player is hitted by sword
-    //...
 
     //check amount of lifes of players
     //...
-      //destroy player if necessary
-      //...
+
+    //destroy player if necessary
+    //...
 
     // Game over if all player killed
 
