@@ -12,7 +12,7 @@ const swordSchema = new Schema({
   active: { type: Boolean, required: true, 'default': true },
   position: {
     x: { type: Number, required: true, 'default': 100 },
-    y: { type: Number, required: true, 'default': 100 }
+    y: { type: Number, required: true, 'default': 0 }
   }
 })
 
@@ -25,22 +25,25 @@ const levelSchema = new Schema({
 
 const playerSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: 'user' },
+  isDead: { type: Boolean, required: true, 'default': false },
+  isHit: { type: Boolean, required: true, 'default': false },
   color: { type: String, required: false },
   name: { type: String, required: true },
   points: {type: Number, required: true, 'default': 0},
   lifes: {type: Number, required: true, 'default': 5},
   position: {
     x: { type: Number, required: true, 'default': 100 },
-    y: { type: Number, required: true, 'default': 100 }
+    y: { type: Number, required: true, 'default': 300 }
   }
 });
 
 const gameSchema = new Schema({
-  swords: [swordSchema],
   players: [playerSchema],
-  started: { type: Boolean, required: true, 'default': false },
+  swords: [swordSchema],
   levels: [levelSchema],
-  winner: { type: Number, required: false },
+  started: { type: Boolean, required: true, 'default': false },
+  ended: { type: Boolean, required: true, 'default': false },
+  winner: { type: Number, required: false },                      // == player = {}
   createdAt: { type: Date, 'default': Date.now },
   updatedAt: { type: Date, 'default': Date.now },
   userId: { type: Schema.Types.ObjectId, ref: 'user' }
