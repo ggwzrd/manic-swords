@@ -57,7 +57,7 @@ class Game extends Component {
     }
 
     return (
-      <Canvas />
+      <Canvas gameStatus={ game } />
     )
   }
 }
