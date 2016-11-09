@@ -48,8 +48,8 @@ class GameList extends Component {
               icon={<FontIcon className="muidocs-icon-communication-voicemail" />}
             />
             <h3>{game.createdBy && game.createdBy.name}</h3>
-            <FlatButton  className="submit primary" type="submit" onClick={ this.join.bind(this, game) } label="Join" />
           </Link>
+          <FlatButton  className="submit primary" type="submit" onClick={ this.join.bind(this, game) } label="Join" />
         </Paper>
       )
   }
