@@ -7,6 +7,33 @@
 
 const defaults = {};
 
+const removeLife = (players) => {
+  return players.map((player) => {
+    if (player.isHit){
+      return player.lifes--    //destroy player if necessary
+    }else{
+      return player
+    }
+  })
+}
+
+const isGameOver = (players) => {
+  return players.reduce((prevPlayer, nextPlayer) => {
+    return nextPlayer.isDead
+  }, false)
+}
+
+const isDead = (player) => {
+  return player.lifes - 1 <= 0 ? true : false
+}
+
+
+const levelCompleted = (swords) => {
+  swords.reduce((completed, sword) => {
+    return !sword.active
+  }, false)
+}
+
 module.exports = function(options) {
   options = Object.assign({}, defaults, options);
 
@@ -15,19 +42,19 @@ module.exports = function(options) {
     const players = hook.data.players;
     const levels = hook.data.levels;
 
+    let updatedPlayers = removeLife(players)
+    hook.data.winner = players.indexOf(updatedPlayers.reduce((prevPlayer, nextPlayer) => {
+      if(prevPlayer.isDead){
+        return nextPlayer
+      }else{
+        return isDead(nextPlayer) ?
+          prevPlayer : {}
+      }
+    }, {}))
 
-    //check amount of lifes of players
-    //...
-
-    //destroy player if necessary
-    //...
-
-    // Game over if all player killed
-
-    //check level status by active swords
-    //...
-
-    //update level if there aren't swords
-    //...
+    if(isGameOver(updatedPlayers)){
+      hook.data.ended = true
+    }
+    //  else update level
   };
 };
