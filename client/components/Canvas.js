@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import './Canvas.sass'
 
+import saveGame from '../actions/update-game'
+
 
 class Canvas extends React.Component {
     componentDidMount() {
