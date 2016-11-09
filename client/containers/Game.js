@@ -10,6 +10,7 @@ import saveGame from '../actions/update-game'
 import './Game.sass'
 
 import Canvas from '../components/Canvas'
+
 const PLAYER_COLORS = ['#0f0', '#00f']
 
 class Game extends Component {

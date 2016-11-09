@@ -1,27 +1,19 @@
-import api from '../middleware/api'
 import appLoading from './loading'
+import model from '../models/GameModel'
+import signOutUser from './destroy-session-user'
 
-const UPDATE_GAME = 'UPDATE_GAME'
-
-export default (newGameStatus) => {
-  return dispatch => {
-    // We're loading (communicating with the API asynchronously)
+export default (game, properties = {}, reset = false) => {
+  return (dispatch) => {
     dispatch(appLoading(true))
-
-    // Here's the new user data, create a User with it
-    api.service('game').update(newGameStatus._id, newGameStatus)
+    model.dispatch = dispatch
+    model.app.authenticate()
       .then((response) => {
-        dispatch(updateGame(response.data))
-      }).catch((error) => {
-        console.error('Error registering!', error);
+        model.save(game, properties, reset)
         dispatch(appLoading(false))
+      }).catch((error) => {
+        dispatch(appLoading(false))
+        console.error(error)
+        dispatch(signOutUser())
       })
-  }
-}
-
-const updateGame = (game) => {
-  return {
-    type: UPDATE_GAME,
-    payload: game
   }
 }
