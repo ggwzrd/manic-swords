@@ -3,11 +3,12 @@ import BaseModel from 'feathersjs-redux-model/build/models/base-model'
 class GameModel extends BaseModel {
   defaults() {
     return {
-      cards: [],
       players: [],
+      swords: [],
+      levels: [],
+      ended: false,
       started: false,
       winner: null,
-      turn: 0,
       createdAt: Date.now,
       updatedAt: Date.now
     };
