@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import './Canvas.sass'
-
+import { connect } from 'react-redux'
 import saveGame from '../actions/update-game'
+import './Canvas.sass'
 
 
 class Canvas extends React.Component {
@@ -13,28 +13,20 @@ class Canvas extends React.Component {
         const ctx = this.refs.canvas.getContext('2d');
         ctx.fillRect(300,300,300,300);
 
-        console.log(currentUser.position.x)
-
         // call functions:
         // 1) player hit by sword?  YES -> update-player
         // 2) key down?         YES -> update-player
 
     }
-
+    
     // check if player is hitted by sword
     //...
 
     render() {
         return (
-            <canvas ref="canvas" width={1200} height={600} onKeyDown = { this.updateCanvas.bind(this) } />
+            <canvas ref="canvas" width={1200} height={600} />
         );
     }
 }
 
-// copied this from Game.js
-Canvas.propTypes = {
-  game: PropTypes.object.isRequired,
-  currentUser: PropTypes.object.isRequired,
-}
-
-export default Canvas
+export default connect()(Canvas)
