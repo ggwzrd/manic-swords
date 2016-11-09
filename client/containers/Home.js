@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import appLoading from '../actions/loading'
+import GamesList from './GamesList'
 import Title from '../components/Title'
 
 
@@ -20,6 +21,7 @@ class Home extends Component {
     return(
       <div className="home">
         <Title label={ userName ? "Welcome, "+userName : "Welcome, Stranger"} />
+        <GamesList />
       </div>
     )
   }
