@@ -11,7 +11,7 @@ const Schema = mongoose.Schema;
 const swordSchema = new Schema({
   active: { type: Boolean, required: true, 'default': true },
   position: {
-    x: { type: Number, required: true, 'default': 100 },
+    x: { type: Number, required: true, 'default': 0 },
     y: { type: Number, required: true, 'default': 0 }
   }
 })
