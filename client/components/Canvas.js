@@ -32,7 +32,7 @@ class Canvas extends React.Component {
 
       const { currentUser, game, isPlayer } = this.props
       console.log(isPlayer)
-      if( !isPLayer ) return
+      // if( !isPLayer ) return
 
       console.log(event)
     }
