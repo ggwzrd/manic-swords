@@ -10,10 +10,7 @@ class Canvas extends React.Component {
     }
 
     updateCanvas() {
-        const ctx = this.refs.canvas.getContext('2d');
-        ctx.fillRect(300,300,300,300);
 
-        console.log(currentUser.position.x)
 
         // call functions:
         // 1) player hit by sword?  YES -> update-player
@@ -21,12 +18,21 @@ class Canvas extends React.Component {
 
     }
 
+    updatePlayer(event) {
+
+      // const ctx = this.refs.canvas.getContext('2d');
+      // ctx.fillRect(300,300,300,300);
+
+      console.log(event)
+      console.log(currentUser.position.x)
+    }
+
     // check if player is hitted by sword
     //...
 
     render() {
         return (
-            <canvas ref="canvas" width={1200} height={600} onKeyDown = { this.updateCanvas.bind(this) } />
+            <canvas ref="canvas" width={1200} height={600} onKeyDown = { this.updatePlayer.bind(this) } />
         );
     }
 }
