@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import './Canvas.sass'
-
+import { connect } from 'react-redux'
 import saveGame from '../actions/update-game'
+import './Canvas.sass'
 
 
 class Canvas extends React.Component {
@@ -10,7 +10,8 @@ class Canvas extends React.Component {
     }
 
     updateCanvas() {
-
+       
+        console.log(currentUser.position.x)
 
         // call functions:
         // 1) player hit by sword?  YES -> update-player
@@ -43,4 +44,4 @@ Canvas.propTypes = {
   currentUser: PropTypes.object.isRequired,
 }
 
-export default Canvas
+export default connect()(Canvas)
