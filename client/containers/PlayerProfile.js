@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import api from '../middleware/api'
 import appLoading  from '../actions/loading'
 import Title from '../components/Title'
-import Avatar from 'material-ui/Avatar';
-import FontIcon from 'material-ui/FontIcon';
-import ListItem from 'material-ui/List/ListItem';
+import Avatar from 'material-ui/Avatar'
+import FontIcon from 'material-ui/FontIcon'
+import ListItem from 'material-ui/List/ListItem'
 
 import './PlayerProfile.sass'
 
@@ -28,6 +28,7 @@ export class PlayerProfile extends Component {
 
       return (
         <div>
+
           <ListItem
             disabled={true}
             leftAvatar={
