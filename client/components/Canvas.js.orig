@@ -16,6 +16,11 @@ class Canvas extends React.Component {
         // call functions:
         // 1) player hit by sword?  YES -> update-player
         // 2) key down?         YES -> update-player
+<<<<<<< HEAD
+
+    }
+=======
+>>>>>>> master
 
     }
     
