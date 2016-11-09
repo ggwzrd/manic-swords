@@ -28,7 +28,7 @@ class Game extends Component {
   canJoin() {
     if (this.isPlayer()) { return false }
     const { game } = this.props
-    return game.players.length <= 2
+    return game.players.length <= 2         // this determines the amount of players that can join the game
   }
 
   joinGame() {
@@ -57,7 +57,7 @@ class Game extends Component {
     }
 
     return (
-      <Canvas />
+      <Canvas gameStatus={ game } />
     )
   }
 }
