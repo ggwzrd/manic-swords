@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import saveGame from '../actions/update-game'
 import './Canvas.sass'
@@ -10,7 +10,7 @@ class Canvas extends React.Component {
     }
 
     updateCanvas() {
-       
+
         console.log(currentUser.position.x)
 
         // call functions:

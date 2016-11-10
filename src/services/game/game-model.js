@@ -32,8 +32,8 @@ const playerSchema = new Schema({
   points: {type: Number, required: true, 'default': 0},
   lifes: {type: Number, required: true, 'default': 5},
   position: {
-    x: { type: Number, required: true, 'default': 450 },
-    y: { type: Number, required: true, 'default': 300 }
+    x: { type: Number, required: true, 'default': 600 },
+    y: { type: Number, required: true, 'default': 600 }
   }
 });
 
