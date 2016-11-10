@@ -8,12 +8,18 @@ import './Canvas.sass'
 
 class Canvas extends React.Component {
 
+<<<<<<< HEAD
+    updateCanvas() {
+
+        console.log(currentUser.position.x)
+=======
   currentPlayer() {
     // if the currentUser has created or joined the game this should return a player
     const { gameStatus, currentUser } = this.props
     return gameStatus.players.filter((player) =>
       player.userId === currentUser._id)[0]
   }
+>>>>>>> master
 
   componentDidMount() {
         this.updateCanvas();

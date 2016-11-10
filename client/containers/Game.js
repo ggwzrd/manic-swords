@@ -41,7 +41,7 @@ class Game extends Component {
   }
 
   render() {
-    const { game } = this.props
+    const { game, currentUser } = this.props
 
     if (!!!game._id) { return null }
 
@@ -57,7 +57,7 @@ class Game extends Component {
     }
 
     return (
-      <Canvas gameStatus={ game } />
+      <Canvas gameStatus={ game } currentUser={ currentUser } />
     )
   }
 }
