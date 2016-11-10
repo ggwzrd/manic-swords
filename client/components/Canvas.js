@@ -8,6 +8,18 @@ import Sword from '../models/SwordModel'
 
 class Canvas extends React.Component {
 
+  componentDidMount() {
+    this.updateCanvas()
+    window.addEventListener( 'keydown', function(event) {
+        this.updatePlayer(event)
+    }.bind(this))
+  }
+
+  componentWillReceiveProps() {
+    console.log('Hey, I received props!')
+    this.updateCanvas()
+  }
+
   currentPlayer() {
       // if the currentUser has created or joined the game this should return a player
       const { game, currentUser } = this.props
@@ -24,22 +36,11 @@ class Canvas extends React.Component {
     player.userId !== currentUser._id)[0]
   }
 
-  componentDidMount() {
-    this.updateCanvas()
-    window.addEventListener( 'keydown', function(event) {
-        this.updatePlayer(event)
-    }.bind(this))
-  }
-
-  componentWillReceiveProps() {
-    console.log('Hey, I received props!')
-    this.updateCanvas()
-  }
-
   updateCanvas() {
       const {players} = this.props.game
       console.log('redrawing', this.props)
       const ctx = this.refs.canvas.getContext('2d')
+      ctx.clearRect(0,0,1000,500)
       ctx.fillRect(players[0].position.x, players[0].position.y, 50,50)
       ctx.fillRect(players[1].position.x, players[1].position.y, 50,50)
   }
@@ -50,8 +51,6 @@ class Canvas extends React.Component {
 
       const currentPlayer = this.currentPlayer()
       const otherPlayer = this.otherPlayer()
-      if(!!!currentPlayer) return false
-
       // console.log(event)
       // console.log(currentPlayer)
       // console.log(currentPlayer.position.x)
