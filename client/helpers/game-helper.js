@@ -16,3 +16,15 @@ export const randomNumBetweenExcluding = (min, max, exMin, exMax) => {
   }
   return random
 }
+
+export const checkCollision = (player, swords) => {
+  return swords.map((sword) => {
+    let vx = player.position.x - sword.position.x;
+    let vy = player.position.y - sword.position.y;
+    let length = Math.sqrt(vx * vx + vy * vy);
+    if(length < player.radius + sword.radius){
+      return { player: player, sword: sword};
+    }
+    return false;
+  })
+}

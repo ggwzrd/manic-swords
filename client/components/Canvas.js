@@ -5,6 +5,7 @@ import './Canvas.sass'
 
 // helpers
 import { updatePlayer, currentPlayer, otherPlayer } from '../helpers/update-player-helper'
+import { checkCollision } from '../helpers/game-helper'
 
 // models [still empty]
 // import Player from '../models/PlayerModel'
@@ -33,9 +34,11 @@ class Canvas extends React.Component {
     draw(){
         const ctx = this.refs.canvas.getContext('2d')
         ctx.clearRect(0,0,WIDTH,HEIGHT)
+        
+        checkCollision(swords)
         // something.draw()
         // swords.map((sword) => sword.draw())
-        this.drawPlayers()
+        this.drawPlayers(currentPlayer(this), )
         window.requestAnimationFrame(this.draw.bind(this))
     }
 
