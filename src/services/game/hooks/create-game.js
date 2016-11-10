@@ -58,9 +58,9 @@ module.exports = function(options) {
     hook.data.players = [{
       userId: user._id,
       name: user.name,
-      puppet: 'http://i.imgur.com/IlCCI7j.png',
+      puppet: 'http://i.imgur.com/GIhH6JQ.png',
       position:{
-        x: randomNumBetween(200, 800),
+        x: randomNumBetween(100, 800),
         y: 450
       }
     }];

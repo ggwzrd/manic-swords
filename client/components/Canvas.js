@@ -30,7 +30,7 @@ class Canvas extends React.Component {
         console.log('redrawing', this.props)
         const ctx = this.refs.canvas.getContext('2d')
 
-        ctx.clearRect(0,0,1000,500)
+        ctx.clearRect(0,0,800,550)
         const puppet1 = new Image()
         const puppet2 = new Image()
         puppet2.src = players[1].puppet
@@ -42,7 +42,7 @@ class Canvas extends React.Component {
     render() {
         return (
           <div className="canvas-container">
-            <canvas ref="canvas" width={1000} height={500} />
+            <canvas ref="canvas" width={800} height={550} />
           </div>
         );
     }

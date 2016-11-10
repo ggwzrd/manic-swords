@@ -38,9 +38,9 @@ class Game extends Component {
     saveGame(game, { players: game.players.concat({
       userId: currentUser._id,
       name: currentUser.name,
-      puppet: 'http://i.imgur.com/TeM2uaw.png',
+      puppet: 'http://i.imgur.com/Gz6uk6O.png',
       position: {
-        x: randomNumBetween(200, 800),
+        x: randomNumBetween(100, 800),
         y: 450
       }
     })})
