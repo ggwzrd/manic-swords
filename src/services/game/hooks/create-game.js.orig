@@ -60,7 +60,11 @@ module.exports = function(options) {
       name: user.name,
       color: '#f00',
       position:{
+<<<<<<< HEAD
+        x: randomNumBetween(200, 1000),
+=======
         x: randomNumBetween(200, 800),
+>>>>>>> master
         y: 450
       }
     }];
