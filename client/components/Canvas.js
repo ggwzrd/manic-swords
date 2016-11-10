@@ -15,35 +15,27 @@ class Canvas extends React.Component {
       player.userId === currentUser._id)[0]
   }
 
-  componentDidMount() {
-        this.updateCanvas();
-        window.addEventListener( 'keydown', function(event) {
-            this.updatePlayer(event)
-        }.bind(this))
-
-    }
-
   updateCanvas() {
-        const {players} = this.props.gameStatus
+    const {players} = this.props.gameStatus
+    const ctx = this.refs.canvas.getContext('2d')
+    ctx.fillRect(players[0].position.x, players[0].position.y, 50,50)
+    // ctx.fillRect(players[1].position.x + 60 ,players[1].position.y + 60, 50,50)
+  }
 
-        const ctx = this.refs.canvas.getContext('2d')
-        ctx.fillRect(players[0].position.x,players[0].position.y, 50,50)
-        ctx.fillRect(players[1].position.x + 60 ,players[1].position.y + 60, 50,50)
+  componentDidMount() {
+    this.updateCanvas();
+    window.addEventListener( 'keydown', function(event) {
+        this.updatePlayer(event)
+    }.bind(this))
   }
 
     updatePlayer(event) {
-
-
       const currentPlayer = this.currentPlayer()
       if(!!!currentPlayer) return false
-
-
 
       console.log(event)
       console.log(currentPlayer)
       console.log(currentPlayer.position.x)
-
-
     }
 
     // check if player is hitted by sword

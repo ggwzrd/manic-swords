@@ -1,12 +1,16 @@
 'use strict';
 
-import { randomNumBetween } from '../../../helpers/game-helper.js'
+
 // src/services/game/hooks/create-game.js
 //
 // Use this hook to manipulate incoming or outgoing data.
 // For more information on hooks see: http://docs.feathersjs.com/hooks/readme.html
 
 const defaults = {};
+
+function randomNumBetween(min, max) {
+  return Math.round((Math.random() * (max - min + 1) + min))
+}
 
 function randomize(level = {}) {
   const swords = []
@@ -50,7 +54,6 @@ module.exports = function(options) {
 
     // Add the all the levels to the game
     hook.data.leves = []
-
     // Add the logged in user as the first player
     hook.data.players = [{
       userId: user._id,
@@ -58,7 +61,7 @@ module.exports = function(options) {
       color: '#f00',
       position:{
         x: randomNumBetween(200, 1000),
-        y: 600
+        y: 550
       }
     }];
 

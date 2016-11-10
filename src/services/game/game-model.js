@@ -33,7 +33,7 @@ const playerSchema = new Schema({
   lifes: {type: Number, required: true, 'default': 5},
   position: {
     x: { type: Number, required: true, 'default': 600 },
-    y: { type: Number, required: true, 'default': 600 }
+    y: { type: Number, required: true, 'default': 550 }
   }
 });
 
