@@ -27,7 +27,7 @@ const playerSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: 'user' },
   isDead: { type: Boolean, required: true, 'default': false },
   isHit: { type: Boolean, required: true, 'default': false },
-  color: { type: String, required: false },
+  puppet: { type: String, required: false },
   name: { type: String, required: true },
   points: {type: Number, required: true, 'default': 0},
   lifes: {type: Number, required: true, 'default': 5},

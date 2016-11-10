@@ -38,7 +38,7 @@ class Game extends Component {
     saveGame(game, { players: game.players.concat({
       userId: currentUser._id,
       name: currentUser.name,
-      color: PLAYER_COLORS[game.players.length],
+      puppet: 'http://i.imgur.com/TeM2uaw.png',
       position: {
         x: randomNumBetween(200, 800),
         y: 450

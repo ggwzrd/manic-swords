@@ -58,7 +58,7 @@ module.exports = function(options) {
     hook.data.players = [{
       userId: user._id,
       name: user.name,
-      color: '#f00',
+      puppet: 'http://i.imgur.com/IlCCI7j.png',
       position:{
         x: randomNumBetween(200, 800),
         y: 450

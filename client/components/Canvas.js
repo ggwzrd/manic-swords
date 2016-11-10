@@ -3,86 +3,41 @@ import { connect } from 'react-redux'
 import saveGame from '../actions/update-game'
 import './Canvas.sass'
 
-import Player from '../models/PlayerModel'
-import Sword from '../models/SwordModel'
+// helpers
+import { updatePlayer, currentPlayer, otherPlayer } from '../helpers/update-player-helper'
+
+// models [still empty]
+// import Player from '../models/PlayerModel'
+// import Sword from '../models/SwordModel'
 
 class Canvas extends React.Component {
 
-  componentDidMount() {
-    this.updateCanvas()
-    window.addEventListener( 'keydown', function(event) {
-        this.updatePlayer(event)
-    }.bind(this))
-  }
+    componentDidMount() {
+      this.updateCanvas()
+      console.log('Hey, we`re MOUNTING')
+      window.addEventListener( 'keydown', function(event) {
+        updatePlayer(this, event)
+      }.bind(this))
+    }
 
-  componentWillReceiveProps() {
-    console.log('Hey, I received props!')
-    this.updateCanvas()
-  }
+    componentDidUpdate() {
+      console.log('Hey, I received props!')
+      this.updateCanvas()
+    }
 
-  currentPlayer() {
-      // if the currentUser has created or joined the game this should return a player
-      const { game, currentUser } = this.props
-      return game.players.filter((player) =>
-      player.userId === currentUser._id)[0]
-  }
+    updateCanvas() {
+        const {players} = this.props.game
+        console.log('redrawing', this.props)
+        const ctx = this.refs.canvas.getContext('2d')
 
-  otherPlayer() {
-    // if another player has joined the game AND there is a currentPlayer,
-    // this function will return the other player
-    // if we wanna have all the others, get them here as an an array
-    const { game, currentUser } = this.props
-    return game.players.filter((player) =>
-    player.userId !== currentUser._id)[0]
-  }
-
-  updateCanvas() {
-      const {players} = this.props.game
-      console.log('redrawing', this.props)
-      const ctx = this.refs.canvas.getContext('2d')
-      ctx.clearRect(0,0,1000,500)
-      ctx.fillRect(players[0].position.x, players[0].position.y, 50,50)
-      ctx.fillRect(players[1].position.x, players[1].position.y, 50,50)
-  }
-
-  updatePlayer(event) {
-      const { saveGame, game } = this.props
-      const { players } = game.players
-
-      const currentPlayer = this.currentPlayer()
-      const otherPlayer = this.otherPlayer()
-      // console.log(event)
-      // console.log(currentPlayer)
-      // console.log(currentPlayer.position.x)
-
-      if(!!!currentPlayer) return false
-
-      const positionX = currentPlayer.position.x
-      const positionY = currentPlayer.position.y
-
-      switch(event.keyCode){
-        case 37:
-          const newPlayersLeft = [otherPlayer, Object.assign({}, currentPlayer,
-            {position: {x: positionX - 50, y: positionY}
-          })]
-          saveGame(game, { players: newPlayersLeft })
-          return false
-        case 39:
-          const newPlayersRight = [otherPlayer, Object.assign({}, currentPlayer,
-            {position: {x: positionX + 50, y: positionY}
-          })]
-          saveGame(game, { players: newPlayersRight })
-          return
-        case 32:
-          const newPlayersJump = [otherPlayer, Object.assign({}, currentPlayer,
-            {position: {x: positionX, y: positionY - 50}
-          })]
-          saveGame(game, { players: newPlayersJump })
-          return
-        default :
-          return
-      }
-  }
+        ctx.clearRect(0,0,1000,500)
+        const puppet1 = new Image()
+        const puppet2 = new Image()
+        puppet2.src = players[1].puppet
+        puppet1.src = players[0].puppet
+        ctx.drawImage(puppet1, players[0].position.x, players[0].position.y)
+        ctx.drawImage(puppet2, players[1].position.x, players[1].position.y)
+    }
 
     render() {
         return (
