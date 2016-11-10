@@ -30,7 +30,7 @@ class GameList extends Component {
   }
 
   join(game){
-    const location = 'games/' + game._id
+    const location = 'game/' + game._id
     history.push(location)
   }
 
