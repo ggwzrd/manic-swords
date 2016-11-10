@@ -1,19 +1,28 @@
 import appLoading from './loading'
-import model from '../models/GameModel'
+import gameModel from '../models/GameModel'
 import signOutUser from './destroy-session-user'
+
+export const GAME_UPDATED = 'GAME_UPDATED'
 
 export default (game, properties = {}, reset = false) => {
   return (dispatch) => {
     dispatch(appLoading(true))
-    model.dispatch = dispatch
-    model.app.authenticate()
+
+    gameModel.dispatch = dispatch
+    gameModel.app.authenticate()
       .then((response) => {
-        model.save(game, properties, reset)
+        gameModel.save(game, properties, reset)
         dispatch(appLoading(false))
       }).catch((error) => {
         dispatch(appLoading(false))
         console.error(error)
         dispatch(signOutUser())
       })
+  }
+}
+
+export function gameUpdate() {
+  return {
+    type: GAME_UPDATED
   }
 }

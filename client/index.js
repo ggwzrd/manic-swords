@@ -24,7 +24,7 @@ render(
         <Route path="sign-up" component={SignUp} />
         <Route path="sign-in" component={SignIn} />
         <Route path="profile/:id" component={PlayerProfile} />
-        <Route path="games/:id" component={Game} />
+        <Route path="game/:id" component={Game} />
         <Route path="*" component={NotFound}/>
       </Route>
     </Router>
