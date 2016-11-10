@@ -2,7 +2,7 @@ import appLoading from './loading'
 import gameModel from '../models/GameModel'
 import signOutUser from './destroy-session-user'
 
-export const GAME_UPDATED = 'GAME_UPDATED'
+// export const GAME_UPDATED = 'GAME_UPDATED'
 
 export default (game, properties = {}, reset = false) => {
   return (dispatch) => {
@@ -21,8 +21,8 @@ export default (game, properties = {}, reset = false) => {
   }
 }
 
-export function gameUpdate() {
-  return {
-    type: GAME_UPDATED
-  }
-}
+// export function gameUpdate() {
+//   return {
+//     type: GAME_UPDATED
+//   }
+// }
