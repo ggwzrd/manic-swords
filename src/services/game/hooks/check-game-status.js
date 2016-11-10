@@ -10,10 +10,11 @@ const defaults = {};
 const removeLife = (players) => {
   return players.map((player) => {
     if (player.isHit){
-      return player.lifes--    //destroy player if necessary
-    }else{
-      return player
+      player.isHit = false
+      player.lifes--
+      return player   //destroy player if necessary
     }
+    return player
   })
 }
 
