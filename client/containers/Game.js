@@ -57,7 +57,7 @@ class Game extends Component {
     }
 
     return (
-      <Canvas gameStatus={ game } currentUser={ currentUser } isPlayer={ this.isPlayer.bind(this) ? true : false } />
+      <Canvas gameStatus={ game } currentUser={ currentUser } />
     )
   }
 }

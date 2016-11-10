@@ -3,38 +3,47 @@ import { connect } from 'react-redux'
 import saveGame from '../actions/update-game'
 import './Canvas.sass'
 
+// import Player from ''
+// import Sword from ''
 
 class Canvas extends React.Component {
 
+  currentPlayer() {
+    // if the currentUser has created or joined the game this should return a player
+    const { gameStatus, currentUser } = this.props
+    return gameStatus.players.filter((player) =>
+      player.userId === currentUser._id)[0]
+  }
+
   componentDidMount() {
         this.updateCanvas();
-
-
         window.addEventListener( 'keydown', function(event) {
-            this.updatePlayer(event).bind(this)
+            this.updatePlayer(event)
         }.bind(this))
 
     }
 
-    updateCanvas() {
+  updateCanvas() {
+        const {players} = this.props.gameStatus
 
-        // console.log(currentUser.position.x)
-
-        // call functions:
-        // 1) player hit by sword?  YES -> update-player
-        // 2) key down?         YES -> update-player
-
-        const ctx = this.refs.canvas.getContext('2d');
-        ctx.fillRect(300,300,300,300);
-    }
+        const ctx = this.refs.canvas.getContext('2d')
+        ctx.fillRect(players[0].position.x,players[0].position.y, 50,50)
+        ctx.fillRect(players[1].position.x + 60 ,players[1].position.y + 60, 50,50)
+  }
 
     updatePlayer(event) {
 
-      const { currentUser, game, isPlayer } = this.props
-      console.log(isPlayer)
-      // if( !isPLayer ) return
+
+      const currentPlayer = this.currentPlayer()
+      if(!!!currentPlayer) return false
+
+
 
       console.log(event)
+      console.log(currentPlayer)
+      console.log(currentPlayer.position.x)
+
+
     }
 
     // check if player is hitted by sword
@@ -51,7 +60,6 @@ class Canvas extends React.Component {
 Canvas.propTypes = {
   gameStatus: PropTypes.object.isRequired,
   currentUser: PropTypes.object.isRequired,
-  isPlayer: PropTypes.bool.isRequired
 }
 
 export default connect()(Canvas)
