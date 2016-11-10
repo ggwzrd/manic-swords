@@ -14,12 +14,13 @@ function randomNumBetween(min, max) {
 
 function randomize(level = {}) {
   const swords = []
-  const step = 1200 / level.amount
+  const step = 800 / level.amount
   let i = 0
   // randomize the position of the swords
   for(i = 0; i <= level.amount; i++ ){
     swords.push({
       active: true,
+      image: 'http://i.imgur.com/U4dKMGW.png',
       position: {
         x: randomNumBetween(0 + (step * i), step),
         y: 0

@@ -34,7 +34,7 @@ export const updatePlayer = (_self, event) => {
         const newPlayersLeft = [player2, Object.assign({}, player1,
           {position: {
             // left 'wall'? go through
-            x: positionX <= 40 ? 760 : positionX - moveAmount,
+            x: positionX <= -40 ? 760 : positionX - moveAmount,
             y: positionY
           }
         })]
@@ -44,7 +44,7 @@ export const updatePlayer = (_self, event) => {
         const newPlayersRight = [player2, Object.assign({}, player1,
           {position: {
             // right 'wall'? go through
-            x: positionX >= 760 ? 40 : positionX + moveAmount,
+            x: positionX >= 760 ? -40 : positionX + moveAmount,
             y: positionY
           }
         })]
@@ -54,7 +54,7 @@ export const updatePlayer = (_self, event) => {
         const newPlayersUp = [player2, Object.assign({}, player1,
           {position: {
             x: positionX,
-            y: positionY <= 60 ? positionY : positionY - moveAmount
+            y: positionY <= 5 ? positionY : positionY - moveAmount
           }
         })]
         saveGame(game, { players: newPlayersUp })
@@ -64,7 +64,7 @@ export const updatePlayer = (_self, event) => {
           {position: {
 
             x: positionX,
-            y: positionY >= 490 ? positionY : positionY + moveAmount
+            y: positionY >= 440 ? positionY : positionY + moveAmount
           }
         })]
         saveGame(game, { players: newPlayersDown })

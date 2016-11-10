@@ -10,10 +10,12 @@ const Schema = mongoose.Schema;
 
 const swordSchema = new Schema({
   active: { type: Boolean, required: true, 'default': true },
+  image: { type: String, required: true },
   position: {
     x: { type: Number, required: true, 'default': 0 },
     y: { type: Number, required: true, 'default': 0 }
-  }
+  },
+  radius: { type: Number, required: true, 'default': 10 },
 })
 
 const levelSchema = new Schema({
@@ -34,7 +36,8 @@ const playerSchema = new Schema({
   position: {
     x: { type: Number, required: true, 'default': 600 },
     y: { type: Number, required: true, 'default': 550 }
-  }
+  },
+  radius: { type: Number, required: true, 'default': 25 },
 });
 
 const gameSchema = new Schema({
