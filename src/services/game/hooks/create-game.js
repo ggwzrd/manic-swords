@@ -60,8 +60,8 @@ module.exports = function(options) {
       name: user.name,
       color: '#f00',
       position:{
-        x: randomNumBetween(200, 1000),
-        y: 550
+        x: randomNumBetween(200, 800),
+        y: 450
       }
     }];
 
