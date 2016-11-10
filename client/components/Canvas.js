@@ -10,27 +10,41 @@ import { updatePlayer, currentPlayer, otherPlayer } from '../helpers/update-play
 // import Player from '../models/PlayerModel'
 // import Sword from '../models/SwordModel'
 
+const WIDTH = 800
+const HEIGHT = 550
+
 class Canvas extends React.Component {
 
     componentDidMount() {
-      this.updateCanvas()
-      console.log('Hey, we`re MOUNTING')
-      window.addEventListener( 'keydown', function(event) {
-        updatePlayer(this, event)
-      }.bind(this))
+        this.drawPlayers()
+        console.log('Hey, we`re MOUNTING')
+        window.addEventListener( 'keydown', function(event) {
+          updatePlayer(this, event)
+        }.bind(this))
+
+        this.draw()
     }
 
-    componentDidUpdate() {
-      console.log('Hey, I received props!')
-      this.updateCanvas()
+    // componentDidUpdate() {
+    //     console.log('Hey, I received props!')
+    //     this.updateCanvas()
+    // }
+
+    draw(){
+        const ctx = this.refs.canvas.getContext('2d')
+        ctx.clearRect(0,0,WIDTH,HEIGHT)
+        // something.draw()
+        // swords.map((sword) => sword.draw())
+        this.drawPlayers()
+        window.requestAnimationFrame(this.draw.bind(this))
     }
 
-    updateCanvas() {
+    drawPlayers() {
         const {players} = this.props.game
-        console.log('redrawing', this.props)
+        // console.log('redrawing', this.props)
         const ctx = this.refs.canvas.getContext('2d')
 
-        ctx.clearRect(0,0,1000,500)
+        ctx.clearRect(0,0,WIDTH,HEIGHT)
         const puppet1 = new Image()
         const puppet2 = new Image()
         puppet2.src = players[1].puppet
@@ -41,7 +55,7 @@ class Canvas extends React.Component {
 
     render() {
         return (
-            <canvas ref="canvas" width={1000} height={500} />
+            <canvas ref="canvas" width={WIDTH} height={HEIGHT} />
         );
     }
 }
