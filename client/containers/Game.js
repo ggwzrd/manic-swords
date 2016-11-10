@@ -8,6 +8,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 import saveGame from '../actions/update-game'
 import './Game.sass'
+import { randomNumBetween } from '../helpers/game-helper'
 
 import Canvas from '../components/Canvas'
 
@@ -38,6 +39,10 @@ class Game extends Component {
       userId: currentUser._id,
       name: currentUser.name,
       color: PLAYER_COLORS[game.players.length],
+      position: {
+        x: randomNumBetween(200, 800),
+        y: 550
+      }
     })})
   }
 

@@ -50,6 +50,7 @@ class Canvas extends React.Component {
 
       const currentPlayer = this.currentPlayer()
       const otherPlayer = this.otherPlayer()
+      if(!!!currentPlayer) return false
 
       // console.log(event)
       // console.log(currentPlayer)

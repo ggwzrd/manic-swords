@@ -1,5 +1,6 @@
 'use strict';
 
+
 // src/services/game/hooks/create-game.js
 //
 // Use this hook to manipulate incoming or outgoing data.
@@ -7,14 +8,26 @@
 
 const defaults = {};
 
-function randomize(array) {
+function randomNumBetween(min, max) {
+  return Math.round((Math.random() * (max - min + 1) + min))
+}
+
+function randomize(level = {}) {
+  const swords = []
+  const step = 1200 / level.amount
+  let i = 0
   // randomize the position of the swords
-  //...
+  for(i = 0; i <= level.amount; i++ ){
+    swords.push({
+      active: true,
+      position: {
+        x: randomNumBetween(0 + (step * i), step),
+        y: 0
+      }
+    })
 
-  // set the speed and amount based on the level
-  //...
-
-  return array;
+    return swords
+  }
 }
 
 module.exports = function(options) {
@@ -26,17 +39,30 @@ module.exports = function(options) {
     // Assign the logged in user as the creator of the game
     hook.data.userId = user._id;
 
-    // Set up the level of the game
-    //...
+    const currentLevel = {
+      title: 'Winter is coming',
+      current: true,
+      speed: 5,
+      amount: 5
+    }
 
-    // Set up the set of swords and randomize them
-    //...
+    const swords = randomize(currentLevel)
 
+    // Add the randomized swords to the game
+
+    hook.data.swords = swords
+
+    // Add the all the levels to the game
+    hook.data.leves = []
     // Add the logged in user as the first player
     hook.data.players = [{
       userId: user._id,
       name: user.name,
       color: '#f00',
+      position:{
+        x: randomNumBetween(200, 1000),
+        y: 550
+      }
     }];
 
   };
