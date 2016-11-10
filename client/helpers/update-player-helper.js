@@ -27,30 +27,45 @@ export const updatePlayer = (_self, event) => {
     const positionX = player1.position.x
     const positionY = player1.position.y
 
-    const moveAmount = 18
+    const moveAmount = 22
 
     switch(event.keyCode){
       case 37:  //left
         const newPlayersLeft = [player2, Object.assign({}, player1,
-          {position: {x: positionX - moveAmount, y: positionY}
+          {position: {
+            // left 'wall'? go through
+            x: positionX <= 40 ? 760 : positionX - moveAmount,
+            y: positionY
+          }
         })]
         saveGame(game, { players: newPlayersLeft })
         return false
       case 39:  // right
         const newPlayersRight = [player2, Object.assign({}, player1,
-          {position: {x: positionX + moveAmount, y: positionY}
+          {position: {
+            // right 'wall'? go through
+            x: positionX >= 760 ? 40 : positionX + moveAmount,
+            y: positionY
+          }
         })]
         saveGame(game, { players: newPlayersRight })
         return
-      case 38:  // up
+      case 38:  // up 'wall' ? stop
         const newPlayersUp = [player2, Object.assign({}, player1,
-          {position: {x: positionX, y: positionY - moveAmount}
+          {position: {
+            x: positionX,
+            y: positionY <= 60 ? positionY : positionY - moveAmount
+          }
         })]
         saveGame(game, { players: newPlayersUp })
         return
-      case 40:  // down
+      case 40:  // down 'wall' ? stop
         const newPlayersDown = [player2, Object.assign({}, player1,
-          {position: {x: positionX, y: positionY + moveAmount}
+          {position: {
+
+            x: positionX,
+            y: positionY >= 490 ? positionY : positionY + moveAmount
+          }
         })]
         saveGame(game, { players: newPlayersDown })
       return
