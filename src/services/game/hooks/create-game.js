@@ -61,7 +61,7 @@ module.exports = function(options) {
       color: '#f00',
       position:{
         x: randomNumBetween(200, 1000),
-        y: 550
+        y: 450
       }
     }];
 

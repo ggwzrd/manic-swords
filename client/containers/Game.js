@@ -41,7 +41,7 @@ class Game extends Component {
       color: PLAYER_COLORS[game.players.length],
       position: {
         x: randomNumBetween(200, 800),
-        y: 550
+        y: 450
       }
     })})
   }
