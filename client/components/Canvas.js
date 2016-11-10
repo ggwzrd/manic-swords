@@ -31,20 +31,40 @@ class Canvas extends React.Component {
     // }
 
     draw(){
+
+
+        const { swords } = this.props.game
+
+
         const ctx = this.refs.canvas.getContext('2d')
         ctx.clearRect(0,0,WIDTH,HEIGHT)
         // something.draw()
         // swords.map((sword) => sword.draw())
+
+
+        this.drawSwords(swords)
         this.drawPlayers()
+
+
         window.requestAnimationFrame(this.draw.bind(this))
     }
 
+    drawSwords(swords) {
+
+      const ctx = this.refs.canvas.getContext('2d')
+      const swordImg = new Image()
+      // ctx.clearRect(0,0,WIDTH,HEIGHT)
+      swords.map((sword) => {
+        swordImg.src = sword.image
+        ctx.drawImage(swordImg, sword.position.x, sword.position.y)
+      })
+    }
+
     drawPlayers() {
-        const {players} = this.props.game
+        const { players } = this.props.game
         // console.log('redrawing', this.props)
         const ctx = this.refs.canvas.getContext('2d')
-
-        ctx.clearRect(0,0,WIDTH,HEIGHT)
+        // ctx.clearRect(0,0,WIDTH,HEIGHT)
         const puppet1 = new Image()
         const puppet2 = new Image()
         puppet2.src = players[1].puppet
