@@ -32,16 +32,27 @@ class Canvas extends React.Component {
     // }
 
     draw(){
-        const { swords } = this.props.game
-        const ctx = this.refs.canvas.getContext('2d')
 
+
+        const { swords } = this.props.game
+
+
+        const ctx = this.refs.canvas.getContext('2d')
         ctx.clearRect(0,0,WIDTH,HEIGHT)
         
         checkCollision(swords)
-       
+        // something.draw()
+        // swords.map((sword) => sword.draw())
+<<<<<<< HEAD
+
+
         this.drawSwords(swords)
         this.drawPlayers()
 
+
+=======
+        this.drawPlayers(currentPlayer(this), )
+>>>>>>> master
         window.requestAnimationFrame(this.draw.bind(this))
     }
 
