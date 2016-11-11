@@ -14,7 +14,6 @@ import Sword from '../models/SwordModel'
 const WIDTH = 800
 const HEIGHT = 550
 let clientSwords = []
-let i=0
 
 class Canvas extends React.Component {
 
@@ -23,7 +22,6 @@ class Canvas extends React.Component {
       clientSwords = swords.map((sword) => {
         return new Sword(sword, levels[0])
       })
-      debugger
     }
 
     // we bind addEventListener to update the player position
@@ -31,7 +29,6 @@ class Canvas extends React.Component {
     componentDidMount() {
        // we draw the players for the first time
       this.drawPlayers()
-      console.log('Hey, we`re MOUNTING')
       window.addEventListener( 'keydown', function(event) {
         updatePlayer(this, event)
       }.bind(this))
@@ -46,6 +43,7 @@ class Canvas extends React.Component {
     //
     componentDidUpdate() {
       const { swords, levels } = this.props.game
+      clientSwords = clientSwords.filter((sword) => sword.isActive ? sword : null)
     }
     // we continuously draw all swords and players
     draw(){
@@ -64,8 +62,8 @@ class Canvas extends React.Component {
             }
           }.bind(this), 500);
         }
+        if(game.started) this.drawSwords()
 
-        this.drawSwords()
         this.drawPlayers()
 
         window.requestAnimationFrame(this.draw.bind(this))
@@ -75,6 +73,7 @@ class Canvas extends React.Component {
     drawSwords() {
       const ctx = this.refs.canvas.getContext('2d')
       const swordImg = new Image()
+      clientSwords = clientSwords.filter((sword) => sword.active ? sword : null)
       clientSwords.map((sword) => {
 
         // the falling class function increments the y-coordinates
