@@ -33,34 +33,41 @@ class Canvas extends React.Component {
       this.draw()
     }
 
-    // componentDidUpdate() {
-    //     console.log('Hey, I received props!')
-    //     this.updateCanvas()
-    // }
+    // Update swords when the hit something
+    //
+    componentDidUpdate() {
+      const { swords, levels } = this.props.game
+      console.log('Hey, I have been updated!')
+      clientSwords.map((sword) => {
+        sword.update(sword) // update the speed (only when level changes) and the swords status
+      })
+      this.draw()
+    }
 
     draw(){
-        const { swords } = this.props.game
+        const { game } = this.props
+        const { saveGame } = this.props
         const ctx = this.refs.canvas.getContext('2d')
         ctx.clearRect(0,0,WIDTH,HEIGHT)
 
-        const collided = checkCollision(swords, currentPlayer(this))
+        const collided = checkCollision(clientSwords, currentPlayer(this))
+        collided.player.hasOwnProperty('isHit') ?
+          saveGame(game, {swords: collided.swords, players: [otherPlayer(this)].concat(collided.player)} ) : null
 
-        !!collided ? saveGame(collided) : false
-
-        this.drawSwords(swords)
+        this.drawSwords()
         this.drawPlayers()
 
         window.requestAnimationFrame(this.draw.bind(this))
     }
 
-    drawSwords(swords) {
-
+    drawSwords() {
       const ctx = this.refs.canvas.getContext('2d')
       const swordImg = new Image()
       clientSwords.map((sword) => {
         sword.falling()
         swordImg.src = sword.image
-        ctx.drawImage(swordImg, sword.position.x, sword.position.y)
+        if(sword.active)
+          ctx.drawImage(swordImg, sword.position.x, sword.position.y)
       })
     }
 
@@ -70,11 +77,14 @@ class Canvas extends React.Component {
 
         const puppet1 = new Image()
         const puppet2 = new Image()
-        puppet2.src = players[1].puppet
         puppet1.src = players[0].puppet
 
         ctx.drawImage(puppet1, players[0].position.x, players[0].position.y)
+        if(players.length < 2){ return }
+
+        puppet2.src = players[1].puppet
         ctx.drawImage(puppet2, players[1].position.x, players[1].position.y)
+
     }
 
     render() {

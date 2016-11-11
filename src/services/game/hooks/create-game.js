@@ -42,8 +42,8 @@ module.exports = function(options) {
     const currentLevel = {
       title: 'Winter is coming',
       current: true,
-      speed: 5,
-      amount: 100
+      speed: 1,
+      amount: 10
     }
 
     const swords = randomize(currentLevel)

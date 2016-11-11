@@ -37,7 +37,7 @@ const playerSchema = new Schema({
     x: { type: Number, required: true, 'default': 600 },
     y: { type: Number, required: true, 'default': 550 }
   },
-  radius: { type: Number, required: true, 'default': 25 },
+  radius: { type: Number, required: true, 'default': 50 },
 });
 
 const gameSchema = new Schema({
