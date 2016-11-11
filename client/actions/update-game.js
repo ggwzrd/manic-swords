@@ -7,7 +7,6 @@ export const GAME_UPDATED = 'GAME_UPDATED'
 export default (game, properties = {}, reset = false) => {
   return (dispatch) => {
     // dispatch(appLoading(true))
-
     gameModel.dispatch = dispatch
     gameModel.app.authenticate()
       .then((response) => {

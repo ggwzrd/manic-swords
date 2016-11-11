@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import saveGame from '../actions/update-game'
 import './Canvas.sass'
 
+// the Scoreboard
+import Scoreboard from '../containers/Scoreboard'
+
 // helpers
 import { updatePlayer, currentPlayer, otherPlayer } from '../helpers/update-player-helper'
 import { checkCollision } from '../helpers/game-helper'
@@ -27,32 +30,34 @@ class Canvas extends React.Component {
     // we bind addEventListener to update the player position
     // when the component has mounted
     componentDidMount() {
-       // we draw the players for the first time
-      this.drawPlayers()
-      console.log('Hey, we`re MOUNTING')
-      window.addEventListener( 'keydown', function(event) {
-        updatePlayer(this, event)
-      }.bind(this))
 
-      // here we trigger the draw function for the first time
-      // we should call this at least once to start the loop
-      // to continuously trigger the drawPlayer and drawSwords functions
-      this.draw()
+        // we draw the players for the first time
+        this.drawPlayers()
+
+        window.addEventListener( 'keydown', function(event) {
+          updatePlayer(this, event)
+        }.bind(this))
+
+        // here we trigger the draw function for the first time
+        // we should call this at least once to start the loop
+        // to continuously trigger the drawPlayer and drawSwords functions
+        this.draw()
     }
+
     // Update swords when the hit something
-    //
     componentDidUpdate() {
-      const { swords, levels } = this.props.game
-      console.log('Hey, I have been updated!')
-      clientSwords.map((sword) => {
-        sword.update(sword) // update the speed (only when level changes) and the swords status
-      })
-      this.draw()
+        const { game } = this.props
+        const { swords, levels } = this.props.game
+        console.log('Hey, I have been updated!')
+        clientSwords.map((sword) => {
+          sword.update(sword) // update the speed (only when level changes) and the swords status
+        })
     }
+
     // we continuously draw all swords and players
     draw(){
-        const { game } = this.props
-        const { saveGame } = this.props
+        const { game, saveGame } = this.props
+
         const ctx = this.refs.canvas.getContext('2d')
         ctx.clearRect(0,0,WIDTH,HEIGHT)
 
@@ -62,6 +67,7 @@ class Canvas extends React.Component {
 
         this.drawSwords()
         this.drawPlayers()
+
 
         window.requestAnimationFrame(this.draw.bind(this))
     }
@@ -100,10 +106,13 @@ class Canvas extends React.Component {
 
     render() {
         return (
-	    <div className="canvas-container">
+          <div>
+            <Scoreboard />
+	          <div className="canvas-container">
               <canvas ref="canvas" width={WIDTH} height={HEIGHT} />
             </div>
-        );
+          </div>
+        )
     }
 }
 

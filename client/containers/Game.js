@@ -12,10 +12,9 @@ import { randomNumBetween } from '../helpers/game-helper'
 
 import Canvas from '../components/Canvas'
 
-const PLAYER_COLORS = ['#0f0', '#00f']
-
 class Game extends Component {
   componentWillMount() {
+    console.log('were mounting')
     this.props.setGameId(this.props.routeParams.id)
     this.props.setUpGame()
   }
