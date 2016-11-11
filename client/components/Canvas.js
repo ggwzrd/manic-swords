@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import saveGame from '../actions/update-game'
 import './Canvas.sass'
 
+// the Scoreboard
+import Scoreboard from '../containers/Scoreboard'
+
 // helpers
 import { updatePlayer, currentPlayer, otherPlayer } from '../helpers/update-player-helper'
 import { checkCollision } from '../helpers/game-helper'
@@ -18,10 +21,10 @@ let clientSwords = []
 class Canvas extends React.Component {
 
     componentWillMount(){
-      const { swords, players, levels } = this.props.game
-      clientSwords = swords.map((sword) => {
-        return new Sword(sword, levels[0])
-      })
+        const { swords, players, levels } = this.props.game
+        clientSwords = swords.map((sword) => {
+          return new Sword(sword, levels[0])
+        })
     }
 
     // we bind addEventListener to update the player position
@@ -43,13 +46,12 @@ class Canvas extends React.Component {
     //
     componentDidUpdate() {
       const { swords, levels } = this.props.game
-      clientSwords = clientSwords.filter((sword) => sword.isActive ? sword : null)
     }
     // we continuously draw all swords and players
     draw(){
-        const { game } = this.props
-        const { saveGame } = this.props
-        const player1 = currentPlayer(this)
+        const { game, saveGame } = this.props
+	
+	const player1 = currentPlayer(this)
         const ctx = this.refs.canvas.getContext('2d')
         ctx.clearRect(0,0,WIDTH,HEIGHT)
 
@@ -108,10 +110,13 @@ class Canvas extends React.Component {
 
     render() {
         return (
+          <div>
+            <Scoreboard />
 	    <div className="canvas-container">
               <canvas ref="canvas" width={WIDTH} height={HEIGHT} />
             </div>
-        );
+          </div>
+        )
     }
 }
 
