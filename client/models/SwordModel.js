@@ -24,16 +24,6 @@ export default class SwordModel {
     return true
   }
 
-  update(data){
-    this.active = data.active
-    this.image = data.image
-    this.position = {
-      x: data.position.x,
-      y: data.position.y
-    }
-    this.radius = data.radius
-  }
-
   falling(){
     if(this.isActive())
       this.position.y += Math.round(Math.random() * SPEED + 1)

@@ -14,14 +14,16 @@ import Sword from '../models/SwordModel'
 const WIDTH = 800
 const HEIGHT = 550
 let clientSwords = []
+let i=0
 
 class Canvas extends React.Component {
 
     componentWillMount(){
-        const { swords, players, levels } = this.props.game
-        clientSwords = swords.map((sword) => {
-          return new Sword(sword, levels[0])
-        })
+      const { swords, players, levels } = this.props.game
+      clientSwords = swords.map((sword) => {
+        return new Sword(sword, levels[0])
+      })
+      debugger
     }
 
     // we bind addEventListener to update the player position
@@ -37,28 +39,31 @@ class Canvas extends React.Component {
       // here we trigger the draw function for the first time
       // we should call this at least once to start the loop
       // to continuously trigger the drawPlayer and drawSwords functions
+      this.drawPlayers()
       this.draw()
     }
     // Update swords when the hit something
     //
     componentDidUpdate() {
       const { swords, levels } = this.props.game
-      console.log('Hey, I have been updated!')
-      clientSwords.map((sword) => {
-        sword.update(sword) // update the speed (only when level changes) and the swords status
-      })
-      this.draw()
     }
     // we continuously draw all swords and players
     draw(){
         const { game } = this.props
         const { saveGame } = this.props
+        const player1 = currentPlayer(this)
         const ctx = this.refs.canvas.getContext('2d')
         ctx.clearRect(0,0,WIDTH,HEIGHT)
 
-        const collided = checkCollision(clientSwords, currentPlayer(this))
-        collided.player.hasOwnProperty('isHit') ?
-          saveGame(game, {swords: collided.swords, players: [otherPlayer(this)].concat(collided.player)} ) : null
+        if(!player1.isDead) {
+          window.setTimeout(function(){
+            const collided = checkCollision(clientSwords, player1)
+            if(collided.player.hasOwnProperty('isHit')){
+              clientSwords = collided.swords
+              saveGame(game, {swords: clientSwords, players: [otherPlayer(this)].concat(collided.player)})
+            }
+          }.bind(this), 500);
+        }
 
         this.drawSwords()
         this.drawPlayers()
@@ -86,14 +91,18 @@ class Canvas extends React.Component {
         const { players } = this.props.game
         const ctx = this.refs.canvas.getContext('2d')
 
-        const puppet1 = new Image()
+        if(!players[0].isDead) {
+          const puppet1 = new Image()
+          puppet1.src = players[0].puppet
+
+          ctx.drawImage(puppet1, players[0].position.x, players[0].position.y)
+        }
+
+        if(players.length < 2 || players[1].isDead){ return }
+
         const puppet2 = new Image()
-        puppet1.src = players[0].puppet
-
-        ctx.drawImage(puppet1, players[0].position.x, players[0].position.y)
-        if(players.length < 2){ return }
-
         puppet2.src = players[1].puppet
+
         ctx.drawImage(puppet2, players[1].position.x, players[1].position.y)
 
     }
