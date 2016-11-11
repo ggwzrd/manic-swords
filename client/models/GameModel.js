@@ -8,6 +8,7 @@ class GameModel extends BaseModel {
       levels: [],
       ended: false,
       started: false,
+      counter: 5,
       winner: null,
       createdAt: Date.now,
       updatedAt: Date.now

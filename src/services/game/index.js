@@ -20,7 +20,7 @@ module.exports = function() {
 
   // Get our initialize service to that we can bind hooks
   const gameService = app.service('/games');
-  debugger
+
   // Set up our before hooks
   gameService.before(hooks.before);
 
