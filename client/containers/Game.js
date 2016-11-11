@@ -33,13 +33,13 @@ class Game extends Component {
 
   joinGame() {
     const { game, saveGame, currentUser } = this.props
-
+    debugger
     saveGame(game, { players: game.players.concat({
       userId: currentUser._id,
       name: currentUser.name,
       puppet: 'http://i.imgur.com/Gz6uk6O.png',
       position: {
-        x: randomNumBetween(100, 800),
+        x: randomNumBetween(100, 700),
         y: 450
       }
     })})
