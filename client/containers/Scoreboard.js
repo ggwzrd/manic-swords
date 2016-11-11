@@ -64,19 +64,19 @@ class Scoreboard extends Component {
     const player2 = otherPlayer(this)
 
     let j = 0
-    let imgs = []
+    let imageTagsArray = []
 
     // how do we get the hearts out??????
     const hearts = (lifes) => {
           for( j = 0; j < lifes; j += 1 )  {
-            imgs.push(j)
+            imageTagsArray.push('http://res.cloudinary.com/pvdh/image/upload/v1478892038/oHgSPgd_-_Imgur_nxjibc.png')
           }
       return(
-        imgs.map((img) => {
-          <img src="//s.imgur.com/min/embed.js" charset="utf-8"></img>
+        imageTagsArray.map((img) => {
+          return <img src={ `${ img }` }></img>
         })
       )
-}
+    }
 
     return (
           <div>
