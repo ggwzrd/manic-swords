@@ -31,7 +31,6 @@ class Scoreboard extends Component {
   }
 
   counter() {
-
       const { game, saveGame } = this.props
       let i = this.state.timer
 
@@ -64,14 +63,28 @@ class Scoreboard extends Component {
     const player1 = currentPlayer(this)
     const player2 = otherPlayer(this)
 
-    return (
-      <div>
-        <div>{ player1.name } : { player1.lifes }</div>
-        <div>{ player2 ? player2.name : 'Waiting for other player' } : { player2 ? player2.lifes : null }</div>
-      </div>
-    )
+    let j = 0
+    let imgs = []
 
-  }
+    // how do we get the hearts out??????
+    const hearts = (lifes) => {
+          for( j = 0; j < lifes; j += 1 )  {
+            imgs.push(j)
+          }
+      return(
+        imgs.map((img) => {
+          <img src="//s.imgur.com/min/embed.js" charset="utf-8"></img>
+        })
+      )
+}
+
+    return (
+          <div>
+            <div>{ player1.name } : { hearts(player1.lifes) }</div>
+            <div>{ player2 ? player2.name : 'Waiting for other player' } : { player2 ? hearts(player2.lifes) : null }</div>
+          </div>
+        )
+      }
 
   renderCountDown() {
     const { timer } = this.state
