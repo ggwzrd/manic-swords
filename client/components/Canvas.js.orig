@@ -17,19 +17,35 @@ import Sword from '../models/SwordModel'
 const WIDTH = 800
 const HEIGHT = 550
 let clientSwords = []
+let i=0
 
 class Canvas extends React.Component {
 
     componentWillMount(){
-        const { swords, players, levels } = this.props.game
-        clientSwords = swords.map((sword) => {
-          return new Sword(sword, levels[0])
-        })
+      const { swords, players, levels } = this.props.game
+      clientSwords = swords.map((sword) => {
+        return new Sword(sword, levels[0])
+      })
+      debugger
     }
 
     // we bind addEventListener to update the player position
     // when the component has mounted
     componentDidMount() {
+<<<<<<< HEAD
+
+        // we draw the players for the first time
+        this.drawPlayers()
+
+        window.addEventListener( 'keydown', function(event) {
+          updatePlayer(this, event)
+        }.bind(this))
+
+        // here we trigger the draw function for the first time
+        // we should call this at least once to start the loop
+        // to continuously trigger the drawPlayer and drawSwords functions
+        this.draw()
+=======
        // we draw the players for the first time
       this.drawPlayers()
       console.log('Hey, we`re MOUNTING')
@@ -42,17 +58,33 @@ class Canvas extends React.Component {
       // to continuously trigger the drawPlayer and drawSwords functions
       this.drawPlayers()
       this.draw()
+>>>>>>> master
     }
+
     // Update swords when the hit something
-    //
     componentDidUpdate() {
+<<<<<<< HEAD
+        const { game } = this.props
+        const { swords, levels } = this.props.game
+        console.log('Hey, I have been updated!')
+        clientSwords.map((sword) => {
+          sword.update(sword) // update the speed (only when level changes) and the swords status
+        })
+=======
       const { swords, levels } = this.props.game
+>>>>>>> master
     }
+
     // we continuously draw all swords and players
     draw(){
+<<<<<<< HEAD
         const { game, saveGame } = this.props
-	
-	const player1 = currentPlayer(this)
+
+=======
+        const { game } = this.props
+        const { saveGame } = this.props
+        const player1 = currentPlayer(this)
+>>>>>>> master
         const ctx = this.refs.canvas.getContext('2d')
         ctx.clearRect(0,0,WIDTH,HEIGHT)
 
@@ -68,6 +100,7 @@ class Canvas extends React.Component {
 
         this.drawSwords()
         this.drawPlayers()
+
 
         window.requestAnimationFrame(this.draw.bind(this))
     }
@@ -112,7 +145,7 @@ class Canvas extends React.Component {
         return (
           <div>
             <Scoreboard />
-	    <div className="canvas-container">
+	          <div className="canvas-container">
               <canvas ref="canvas" width={WIDTH} height={HEIGHT} />
             </div>
           </div>
