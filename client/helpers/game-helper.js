@@ -24,13 +24,12 @@ export const checkCollision = (swords, player) => {
   swords.map((sword) => {
     let svx = sword.position.x + sword.radius
     let svy = sword.position.y + (sword.radius * 2)
-    let pvx = player.position.x + player.radius
-    let pvy = player.position.y + player.radius
+    let pvx = player.position.x + (player.radius * 2)
+    let pvy = player.position.y + (player.radius * 2)
     // console.log(length, player.radius + sword.radius)
-    if(svx >= player.position.x && svx <= pvx && svy >= player.position.y && svy <= pvy){
+    if(svx >= player.position.x && svx <= pvx && svy >= player.position.y && svy <= pvy && sword){
       player.isHit = true
-      console.log(player.lifes)
-      result.swords = (swords.filter((s) => s._id !== sword._id).concat(Object.assign({}, sword, {active: false})))
+      result.swords = swords.filter((s) => s._id !== sword._id)
       Object.assign(result, { player: player })
     }
   })

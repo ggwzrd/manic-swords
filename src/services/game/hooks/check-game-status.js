@@ -11,8 +11,8 @@ const removeLife = (players) => {
   return players.map((player) => {
     if (player.isHit){
       player.isHit = false
-      !!isDead(player) ? player.isDead = true : null
       player.lifes--
+      !!isDead(player) ? player.isDead = true : null
       return player   //destroy player if necessary
     }
     return player
