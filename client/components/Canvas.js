@@ -8,22 +8,29 @@ import { updatePlayer, currentPlayer, otherPlayer } from '../helpers/update-play
 import { checkCollision } from '../helpers/game-helper'
 
 // models [still empty]
-// import Player from '../models/PlayerModel'
-// import Sword from '../models/SwordModel'
+import Player from '../models/PlayerModel'
+import Sword from '../models/SwordModel'
 
 const WIDTH = 800
 const HEIGHT = 550
+let clientSwords = []
 
 class Canvas extends React.Component {
 
+  componentWillMount(){
+    const { swords, players, levels } = this.props.game
+    clientSwords = swords.map((sword) => {
+      return new Sword(sword, levels[0])
+    })
+  }
     componentDidMount() {
-        this.drawPlayers()
-        console.log('Hey, we`re MOUNTING')
-        window.addEventListener( 'keydown', function(event) {
-          updatePlayer(this, event)
-        }.bind(this))
+      this.drawPlayers()
+      console.log('Hey, we`re MOUNTING')
+      window.addEventListener( 'keydown', function(event) {
+        updatePlayer(this, event)
+      }.bind(this))
 
-        this.draw()
+      this.draw()
     }
 
     // componentDidUpdate() {
@@ -34,11 +41,12 @@ class Canvas extends React.Component {
     draw(){
         const { swords } = this.props.game
         const ctx = this.refs.canvas.getContext('2d')
-
         ctx.clearRect(0,0,WIDTH,HEIGHT)
-        
-        checkCollision(swords)
-       
+
+        const collided = checkCollision(swords, currentPlayer(this))
+
+        !!collided ? saveGame(collided) : false
+
         this.drawSwords(swords)
         this.drawPlayers()
 
@@ -49,8 +57,8 @@ class Canvas extends React.Component {
 
       const ctx = this.refs.canvas.getContext('2d')
       const swordImg = new Image()
-      // ctx.clearRect(0,0,WIDTH,HEIGHT)
-      swords.map((sword) => {
+      clientSwords.map((sword) => {
+        sword.falling()
         swordImg.src = sword.image
         ctx.drawImage(swordImg, sword.position.x, sword.position.y)
       })
@@ -58,13 +66,13 @@ class Canvas extends React.Component {
 
     drawPlayers() {
         const { players } = this.props.game
-        // console.log('redrawing', this.props)
         const ctx = this.refs.canvas.getContext('2d')
-        // ctx.clearRect(0,0,WIDTH,HEIGHT)
+
         const puppet1 = new Image()
         const puppet2 = new Image()
         puppet2.src = players[1].puppet
         puppet1.src = players[0].puppet
+
         ctx.drawImage(puppet1, players[0].position.x, players[0].position.y)
         ctx.drawImage(puppet2, players[1].position.x, players[1].position.y)
     }
