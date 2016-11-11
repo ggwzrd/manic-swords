@@ -32,7 +32,6 @@ class Canvas extends React.Component {
     componentDidMount() {
        // we draw the players for the first time
       this.drawPlayers()
-      console.log('Hey, we`re MOUNTING')
       window.addEventListener( 'keydown', function(event) {
         updatePlayer(this, event)
       }.bind(this))
@@ -65,8 +64,8 @@ class Canvas extends React.Component {
             }
           }.bind(this), 500);
         }
+        if(game.started) this.drawSwords()
 
-        this.drawSwords()
         this.drawPlayers()
 
         window.requestAnimationFrame(this.draw.bind(this))
@@ -76,6 +75,7 @@ class Canvas extends React.Component {
     drawSwords() {
       const ctx = this.refs.canvas.getContext('2d')
       const swordImg = new Image()
+      clientSwords = clientSwords.filter((sword) => sword.active ? sword : null)
       clientSwords.map((sword) => {
 
         // the falling class function increments the y-coordinates

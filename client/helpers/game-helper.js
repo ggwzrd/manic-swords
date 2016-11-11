@@ -29,7 +29,7 @@ export const checkCollision = (swords, player) => {
     // console.log(length, player.radius + sword.radius)
     if(svx >= player.position.x && svx <= pvx && svy >= player.position.y && svy <= pvy && sword){
       player.isHit = true
-      result.swords = swords.filter((s) => s._id !== sword._id)
+      result.swords = swords.filter((s) => s._id !== sword._id && s.isActive())
       Object.assign(result, { player: player })
     }
   })
