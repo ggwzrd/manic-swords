@@ -39,7 +39,6 @@ class Canvas extends React.Component {
       // to continuously trigger the drawPlayer and drawSwords functions
       this.draw()
     }
-
     // Update swords when the hit something
     //
     componentDidUpdate() {
