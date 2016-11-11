@@ -56,7 +56,8 @@ module.exports = function(options) {
 
     if(isGameOver(updatedPlayers)){
       hook.data.ended = true
+    }else{
+      updateLevel(levels)
     }
-    //  else update level
   };
 };

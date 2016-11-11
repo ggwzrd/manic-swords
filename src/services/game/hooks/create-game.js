@@ -39,21 +39,34 @@ module.exports = function(options) {
     // Assign the logged in user as the creator of the game
     hook.data.userId = user._id;
 
-    const currentLevel = {
-      title: 'Winter is coming',
+    const level1 = {
+      title: 'Air of War',
       current: true,
       speed: 1,
       amount: 50
     }
+    const level2 = {
+      title: 'Winter is coming',
+      current: false,
+      speed: 2,
+      amount: 150
+    }
 
-    const swords = randomize(currentLevel)
+    const level3 = {
+      title: 'Winter is coming',
+      current: false,
+      speed: 4,
+      amount: 300
+    }
+
+    const swords = randomize(level1)
 
     // Add the randomized swords to the game
 
     hook.data.swords = swords
 
     // Add the all the levels to the game
-    hook.data.levels = [currentLevel]
+    hook.data.levels = [level1, level2, level3]
     // Add the logged in user as the first player
     hook.data.players = [{
       userId: user._id,
