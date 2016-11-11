@@ -112,7 +112,7 @@ class Canvas extends React.Component {
     render() {
         return (
           <div>
-            <Scoreboard />
+            <Scoreboard className='scoreboard'/>
             <div className="canvas-container">
               <canvas ref="canvas" width={WIDTH} height={HEIGHT} />
             </div>
