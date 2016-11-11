@@ -14,9 +14,9 @@ import Canvas from '../components/Canvas'
 
 class Game extends Component {
   componentWillMount() {
-    
-    this.props.setGameId(this.props.routeParams.id)
-    this.props.setUpGame()
+      console.log('were mounting')
+      this.props.setGameId(this.props.routeParams.id)
+      this.props.setUpGame()
   }
 
   isPlayer() {
@@ -33,8 +33,17 @@ class Game extends Component {
 
   joinGame() {
     const { game, saveGame, currentUser } = this.props
-
+    debugger
     saveGame(game, { players: game.players.concat({
+<<<<<<< HEAD
+        userId: currentUser._id,
+        name: currentUser.name,
+        puppet: 'http://i.imgur.com/Gz6uk6O.png',
+        position: {
+          x: randomNumBetween(100, 800),
+          y: 450
+        }
+=======
       userId: currentUser._id,
       name: currentUser.name,
       puppet: 'http://i.imgur.com/Gz6uk6O.png',
@@ -42,6 +51,7 @@ class Game extends Component {
         x: randomNumBetween(100, 700),
         y: 450
       }
+>>>>>>> 3f12bfa99c1a4a1668fea1996d7efc42ac24f058
     })})
   }
 

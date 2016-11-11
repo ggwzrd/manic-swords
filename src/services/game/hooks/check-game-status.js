@@ -7,6 +7,10 @@
 
 const defaults = {};
 
+const isDead = (player) => {
+  return player.lifes <= 0 ? true : false
+}
+
 const removeLife = (players) => {
   return players.map((player) => {
     if (player.isHit){
@@ -23,10 +27,6 @@ const isGameOver = (players) => {
   return players.reduce((prevPlayer, nextPlayer) => {
     return nextPlayer.isDead
   }, false)
-}
-
-const isDead = (player) => {
-  return player.lifes - 1 <= 0 ? true : false
 }
 
 
@@ -56,8 +56,6 @@ module.exports = function(options) {
 
     if(isGameOver(updatedPlayers)){
       hook.data.ended = true
-    }else{
-      updateLevel(levels)
     }
-  };
-};
+  }
+}
