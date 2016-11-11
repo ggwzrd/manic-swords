@@ -1,25 +1,23 @@
 
+let SPEED = 0
 
 export default class SwordModel {
-  defaults() {
-    return {
 
-    }
+  constructor(data, level) {
+      SPEED = level.speed
+      this.active = data.active
+      this.image = data.image
+      this.position = {
+        x: data.position.x,
+        y: data.position.y
+      }
+      this.radius = data.radius
   }
 
-  // // Do we need this?
-  // findParams() {
-  //   return{
-  //     query: {
-  //       $sort: { createdAt: -1 },
-  //       $limit: 10
-  //     }
-  //   }
-  // }
-  // 
-  // constructor(dispatch, onError) {
-  //   super('game', dispatch, onError);
-  // }
-}
+  falling(){
+    this.position.y += Math.round(Math.random() * SPEED + 1)
+  }
 
-const swordModel = new SwordModel()
+
+
+}

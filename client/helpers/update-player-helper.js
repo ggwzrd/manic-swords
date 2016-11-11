@@ -1,11 +1,11 @@
-const currentPlayer = (_self) => {
+export const currentPlayer = (_self) => {
     // if the currentUser has created or joined the game this should return a player
     const { game, currentUser } = _self.props
     return game.players.filter((player) =>
     player.userId === currentUser._id)[0]
 
 }
-const otherPlayer = (_self) => {
+export const otherPlayer = (_self) => {
   // if another player has joined the game AND there is a currentPlayer,
   // this function will return the other player
   // if we wanna have all the others, get them here as an an array

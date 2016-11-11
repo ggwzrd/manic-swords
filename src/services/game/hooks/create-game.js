@@ -12,23 +12,22 @@ function randomNumBetween(min, max) {
   return Math.round((Math.random() * (max - min + 1) + min))
 }
 
-function randomize(level = {}) {
+function randomize(level) {
   const swords = []
   const step = 800 / level.amount
   let i = 0
   // randomize the position of the swords
-  for(i = 0; i <= level.amount; i++ ){
+  for(i = 0; i < level.amount; i++ ){
     swords.push({
       active: true,
       image: 'http://i.imgur.com/U4dKMGW.png',
       position: {
-        x: randomNumBetween(0 + (step * i), step),
-        y: 0
+        x: randomNumBetween(40 + (step * i), step * i),
+        y: randomNumBetween(-50, -(50 * level.amount))
       }
     })
-
-    return swords
   }
+  return swords
 }
 
 module.exports = function(options) {
@@ -44,7 +43,7 @@ module.exports = function(options) {
       title: 'Winter is coming',
       current: true,
       speed: 5,
-      amount: 5
+      amount: 100
     }
 
     const swords = randomize(currentLevel)
@@ -54,7 +53,7 @@ module.exports = function(options) {
     hook.data.swords = swords
 
     // Add the all the levels to the game
-    hook.data.leves = []
+    hook.data.levels = [currentLevel]
     // Add the logged in user as the first player
     hook.data.players = [{
       userId: user._id,
