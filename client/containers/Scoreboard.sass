@@ -1,31 +1,38 @@
 .game-status
-  display: -webkit-flex
-  -webkit-flex-wrap: wrap
   display: flex
   flex-wrap: wrap
   justify-content: space-between
-  border: 5px solid rgba(0, 0, 0, 0.3)
-  width: 80%
-  height: 250px
+  border: 1px solid rgba(0, 0, 0, 0.3)
+  width: 100%
+  height: 100px
   background-color: rgb(191, 127, 53)
+  font-size: 16px
 
 .count-down
+  width: 100px
+  height: 50px
+  font-size: 12px
+
+.status-player
+  width: 150px
+  display: flex
   justify-content: space-between
-  width: 33%
+  flex-wrap: wrap
+  align-items: center
 
-div.count-down
-  font-size: 60
-  margin-top: 55px
-  text-align: center
-
-.status-player1
-  justify-content: left
-  width: 33%
-
-div.status-player1
   img
-    padding: 10px
+    width: 50px !important
+    height: 50px !important
 
-.status-player2
-  justify-content: right
-  width: 33%
+.lifes img
+  width: 20px
+  height: 20px
+
+  .count-down
+    justify-content: space-between
+    width: 33%
+
+  div.count-down
+    font-size: 60
+    margin-top: 55px
+    text-align: center
