@@ -51,7 +51,7 @@ class Canvas extends React.Component {
     draw(){
         const { game, saveGame } = this.props
 
-	const player1 = currentPlayer(this)
+	      const player1 = currentPlayer(this)
         const ctx = this.refs.canvas.getContext('2d')
         ctx.clearRect(0,0,WIDTH,HEIGHT)
 
