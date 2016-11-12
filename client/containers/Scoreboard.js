@@ -68,6 +68,10 @@ class Scoreboard extends Component {
 
   renderGameStatus() {
 
+    const player1 = currentPlayer(this)
+    const player2 = otherPlayer(this)
+    const { game } = this.props
+
     const countDown = () => {
       const { timer } = this.state
 
@@ -75,9 +79,6 @@ class Scoreboard extends Component {
         <div>{ (timer === 6) ? 'Get ready!' : (timer > 0 ) ? timer : 'Move!' }</div>
       )
     }
-
-    const player1 = currentPlayer(this)
-    const player2 = otherPlayer(this)
 
     // get hearts for each life
     const hearts = (lifes) => {
@@ -107,7 +108,7 @@ class Scoreboard extends Component {
             </div>
 
             <div className='count-down'>
-              { countDown() }
+              { game.started ? game.levels[0].title : countDown() }
             </div>
 
             <div className='status-player2'>
