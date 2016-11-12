@@ -32,7 +32,7 @@ class Canvas extends React.Component {
     componentDidMount() {
        // we draw the players for the first time
       this.drawPlayers()
-      window.addEventListener( 'keydown', function(event) {
+      window.addEventListener( 'keyup', function(event) {
         updatePlayer(this, event)
       }.bind(this))
 
