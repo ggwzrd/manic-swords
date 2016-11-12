@@ -41,7 +41,8 @@ const playerSchema = new Schema({
 });
 
 const gameSchema = new Schema({
-  players: [playerSchema],
+  playerOne: playerSchema,
+  playerTwo: playerSchema,
   swords: [swordSchema],
   levels: [levelSchema],
   started: { type: Boolean, required: true, 'default': false },
