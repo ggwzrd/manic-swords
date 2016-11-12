@@ -28,7 +28,7 @@ export const cleanDisabledSword = (_self, game, swords) => {
 
 export const checkCollision = (swords, player) => {
   let result = { swords:[], player: {}}
-  swords.map((sword) => {
+  result.swords = swords.map((sword) => {
     let svx = sword.position.x + sword.radius
     let svy = sword.position.y + (sword.radius * 2)
     let pvx = player.position.x + (player.radius * 2)
@@ -36,9 +36,11 @@ export const checkCollision = (swords, player) => {
     // console.log(length, player.radius + sword.radius)
     if(svx >= player.position.x && svx <= pvx && svy >= player.position.y && svy <= pvy && sword){
       player.isHit = true
-      result.swords = swords.filter((s) => s._id !== sword._id && s.isActive())
       Object.assign(result, { player: player })
+      sword.position.y = randomNumBetween(-50, -(50 * swords.length))
+      return sword
     }
+    return sword
   })
   return result
 }

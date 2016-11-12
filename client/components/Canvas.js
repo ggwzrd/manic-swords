@@ -17,13 +17,23 @@ import Sword from '../models/SwordModel'
 const WIDTH = 800
 const HEIGHT = 550
 let clientSwords = []
+let titles = [
+  '',
+  'Air of war',
+  'Winter is coming',
+  'Swords madness',
+  'Massive blood',
+]
+let SPEED = 0
 
 class Canvas extends React.Component {
 
     componentWillMount(){
-        const { swords, levels } = this.props.game
+        const { swords, level } = this.props.game
+        SPEED = 0
+        SPEED = level.speed
         clientSwords = swords.map((sword) => {
-          return new Sword(sword, levels[0])
+          return new Sword(sword, level)
         })
     }
 
@@ -31,11 +41,17 @@ class Canvas extends React.Component {
     // when the component has mounted
     componentDidMount() {
        // we draw the players for the first time
-       const { game } = this.props
+       const { game, saveGame } = this.props
       this.drawPlayers()
       window.addEventListener( 'keydown', function(event) {
         updatePlayer(this, event)
       }.bind(this))
+
+      setInterval(function () {
+        SPEED = game.level.speed + 1
+        saveGame(game, {level: { speed: SPEED, title: titles[SPEED] }})
+        console.log('level changed')
+      }, 10000);
       // here we trigger the draw function for the first time
       // we should call this at least once to start the loop
       // to continuously trigger the drawPlayer and drawSwords functions
@@ -104,7 +120,7 @@ class Canvas extends React.Component {
       clientSwords.map((sword) => {
         // the falling class function increments the y-coordinates
         // of the swords each time we draw
-        sword.falling()
+        sword.falling(SPEED)
         if(sword.active && sword.position.y > 0 ){
           swordImg.src = sword.image
           ctx.drawImage(swordImg, sword.position.x, sword.position.y)

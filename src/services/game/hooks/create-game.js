@@ -41,9 +41,8 @@ module.exports = function(options) {
 
     const level1 = {
       title: 'Air of War',
-      current: true,
       speed: 1,
-      amount: 100
+      amount: 25
     }
     // const level2 = {
     //   title: 'Winter is coming',
@@ -66,7 +65,7 @@ module.exports = function(options) {
     hook.data.swords = swords
 
     // Add the all the levels to the game
-    hook.data.levels = [level1]
+    hook.data.level = level1
     // Add the logged in user as the first player
     hook.data.playerOne = {
       userId: user._id,

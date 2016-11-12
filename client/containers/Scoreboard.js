@@ -122,7 +122,7 @@ class Scoreboard extends Component {
             </div>
 
             <div className='count-down'>
-              { game.started ? game.levels[0].title : countDown() }
+              { game.started ? game.level.title : countDown() }
             </div>
 
             <div className='status-player2'>

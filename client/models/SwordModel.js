@@ -1,10 +1,9 @@
+import { randomNumBetween } from '../helpers/game-helper'
 
-let SPEED = 0
 
 export default class SwordModel {
 
-  constructor(data, level) {
-      SPEED = level.speed
+  constructor(data) {
       this._id = data._id
       this.active = data.active
       this.image = data.image
@@ -14,19 +13,22 @@ export default class SwordModel {
       }
       this.radius = data.radius
   }
-
+  updateSpeed(){
+    SPEED
+  }
   isActive(){
     if(this.position.y >= 550){
-      this.active = false
       return false
     }
 
     return true
   }
 
-  falling(){
+  falling(speed){
     if(this.isActive())
-      this.position.y += Math.round(Math.random() * SPEED + 1)
+      this.position.y += Math.round(Math.random() * speed + 1)
+    else
+      this.position.y = randomNumBetween(-50, -(50 * 25))
   }
 
 
