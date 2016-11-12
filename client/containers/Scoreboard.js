@@ -26,8 +26,11 @@ class Scoreboard extends Component {
         this.counter()
   }
 
-  componentDidUpdate () {
-        if ( !game.started ) {
+  componentDidUpdate() {
+
+        const { game } = this.props
+
+        if ( !game.started && game.swords.length <= 0 ) {
           // super()
           this.state = {
             timer: 6
