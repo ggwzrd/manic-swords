@@ -3,7 +3,7 @@ var webpack = require('webpack');
 var HTMLWebpackPlugin = require('html-webpack-plugin');
 
 var HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
-  template: path.join(__dirname, 'app', 'index.html'),
+  template: path.join(__dirname, 'client', 'index.html'),
   filename: 'index.html',
   inject: 'body'
 });
@@ -14,7 +14,7 @@ module.exports = {
     './client/index'
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'static'),
     filename: 'bundle.js',
     publicPath: '/static/'
   },
@@ -30,17 +30,27 @@ module.exports = {
         warnings: false
       }
     }),
+    new webpack.ProvidePlugin({
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    }),
     new webpack.NoErrorsPlugin(),
     HTMLWebpackPluginConfig
   ],
   module: {
-    loaders: [{
-      test: /\.jsx?/,
-      loader: 'babel',
-      query: {
-        presets: ['es2015', 'react']
+    loaders: [
+      {
+        test: /\.jsx?/,
+        include: path.join(__dirname, 'client'),
+        exclude: [/(node_modules|bower_components)/, /\.test\.jsx?$/],
+        loader: 'babel',
+        query: {
+          presets: ['airbnb', 'react', 'es2015', 'stage-0']
+       },
       },
-      exclude: /node_modules/
-    }]
+      { test: /\.woff2?$/, loader: 'url-loader?limit=10000&minetype=application/font-woff' },
+      { test: /\.(ttf|eot|svg|png|gif)$/, loader: 'file-loader' },
+      { test: /\.(sass|scss)$/, loader: 'style!css!sass'},
+      { test: /\.json$/, loader: 'json-loader'}
+    ]
   }
 };
