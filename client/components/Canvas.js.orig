@@ -33,6 +33,7 @@ class Canvas extends React.Component {
        // we draw the players for the first time
        const { game } = this.props
       this.drawPlayers()
+      console.log('Hey, we`re MOUNTING')
       window.addEventListener( 'keydown', function(event) {
         updatePlayer(this, event)
       }.bind(this))
@@ -52,27 +53,45 @@ class Canvas extends React.Component {
     }
     // we continuously draw all swords and players
     draw(){
-(??)        const { game, saveGame } = this.props
-(??)	
-(??)	const player1 = currentPlayer(this)
-(??)        const ctx = this.refs.canvas.getContext('2d')
-(??)        ctx.clearRect(0,0,WIDTH,HEIGHT)
+<<<<<<< HEAD
+      const { game, saveGame } = this.props
+=======
+        const { game, saveGame } = this.props
 
-(??)        if(!player1.isDead) {
-(??)          window.setTimeout(function(){
-(??)            const collided = checkCollision(clientSwords, player1)
-(??)            if(collided.player.hasOwnProperty('isHit')){
-	   	  const snd = new Audio('../audio/hit.wav')
-                  snd.play()
-(??)              clientSwords = collided.swords
-(??)              saveGame(game, {swords: clientSwords, players: [otherPlayer(this)].concat(collided.player)})
-(??)            }
-(??)          }.bind(this), 700);
-(??)        }
-(??)        if(game.started) this.drawSwords()
+	      const player1 = currentPlayer(this)
+        const ctx = this.refs.canvas.getContext('2d')
+        ctx.clearRect(0,0,WIDTH,HEIGHT)
 
+        if(!player1.isDead) {
+          window.setTimeout(function(){
+            const collided = checkCollision(clientSwords, player1)
+            if(collided.player.hasOwnProperty('isHit')){
+              const snd = new Audio('../audio/hit.wav')
+              snd.play()
+              clientSwords = collided.swords
+              saveGame(game, {swords: clientSwords, players: [otherPlayer(this)].concat(collided.player)})
+            }
+          }.bind(this), 500);
+        }
+        if(game.started) this.drawSwords()
+>>>>>>> master
 
-        this.drawPlayers()
+	    const player1 = currentPlayer(this)
+      const ctx = this.refs.canvas.getContext('2d')
+      ctx.clearRect(0,0,WIDTH,HEIGHT)
+
+      if(!player1.isDead) {
+        window.setTimeout(function(){
+          const collided = checkCollision(clientSwords, player1)
+          if(collided.player.hasOwnProperty('isHit')){
+            clientSwords = collided.swords
+            saveGame(game, {swords: clientSwords, players: [otherPlayer(this)].concat(collided.player)})
+          }
+        }.bind(this), 700);
+      }
+
+      this.drawSwords()
+      this.drawPlayers()
 
       window.requestAnimationFrame(this.draw.bind(this))
     }
@@ -115,7 +134,11 @@ class Canvas extends React.Component {
     render() {
         return (
           <div>
+<<<<<<< HEAD
+            <Scoreboard />
+=======
             <Scoreboard className='scoreboard'/>
+>>>>>>> master
             <div className="canvas-container">
               <canvas ref="canvas" width={WIDTH} height={HEIGHT} />
             </div>
