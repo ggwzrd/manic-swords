@@ -36,9 +36,6 @@ class Canvas extends React.Component {
       window.addEventListener( 'keyup', function(event) {
         updatePlayer(this, event)
       }.bind(this))
-      setInterval(function () {
-        cleanDisabledSword(this, game,  clientSwords)
-      }.bind(this), 5000)
       // here we trigger the draw function for the first time
       // we should call this at least once to start the loop
       // to continuously trigger the drawPlayer and drawSwords functions
@@ -48,8 +45,23 @@ class Canvas extends React.Component {
     // Update swords when the hit something
     //
     componentDidUpdate() {
-      const { swords, levels } = this.props.game
+      const { game } = this.props
+
+      if(game.started){
+        // this.startCleaning.bind(this)()
+      }
     }
+
+    startCleaning (){
+      const { game } = this.props
+      const cleaningSwords = setInterval(function () {
+        cleanDisabledSword(this, game,  clientSwords)
+        if(!game.started){
+          clearInterval(cleaningSwords)
+        }
+      }.bind(this), 5000)
+    }
+
     // we continuously draw all swords and players
     draw(){
       const { game, saveGame } = this.props
