@@ -33,7 +33,7 @@ class Canvas extends React.Component {
        // we draw the players for the first time
        const { game } = this.props
       this.drawPlayers()
-      window.addEventListener( 'keydown', function(event) {
+      window.addEventListener( 'keyup', function(event) {
         updatePlayer(this, event)
       }.bind(this))
       setInterval(function () {
