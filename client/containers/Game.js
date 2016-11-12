@@ -33,7 +33,6 @@ class Game extends Component {
 
   joinGame() {
     const { game, saveGame, currentUser } = this.props
-
     saveGame(game, { players: game.players.concat({
       userId: currentUser._id,
       name: currentUser.name,
