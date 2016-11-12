@@ -30,7 +30,7 @@ class Scoreboard extends Component {
 
         const { game } = this.props
 
-        if ( !game.started && game.swords.length <= 0 ) {
+        if ( !game.started && game.swords.length <= 0 && !game.ended ) {
           // super()
           this.state = {
             timer: 6
