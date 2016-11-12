@@ -16,7 +16,6 @@ import { currentPlayer, otherPlayer } from '../helpers/update-player-helper'
 class Scoreboard extends Component {
 
   constructor() {
-      console.log('Scoreboard: I`m constructing')
          super()
          this.state = {
            timer: 6
@@ -24,13 +23,15 @@ class Scoreboard extends Component {
    }
 
   componentDidMount() {
-        console.log('Scoreboard: component mounted')
         this.counter()
   }
 
   componentDidUpdate () {
+        console.log('Scoreboard: updated')
         const i = this.state.timer
-        if (i === 5){
+        if (i === 6){
+          const snd = new Audio('../audio/ready.wav')
+          snd.play()
           this.counter()
         }
   }
@@ -44,8 +45,7 @@ class Scoreboard extends Component {
       // if the other player joined
       // if true we start the timer
       if (!game.started && (game.players.length >= 2) && !game.ended) {
-        console.log('Scoreboard: I`m gonna start the counter')
-        console.log(i)
+
         // count down
         const intId = setInterval(() => {
           i--
@@ -57,6 +57,8 @@ class Scoreboard extends Component {
            }
           if (i < 0) {
             // start the game
+            const snd = new Audio('../audio/start.wav')
+            snd.play()
             saveGame(game, {started: true})
             clearInterval(intId)
           }
