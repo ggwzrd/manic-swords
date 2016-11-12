@@ -14,26 +14,26 @@ import Canvas from '../components/Canvas'
 
 class Game extends Component {
   componentWillMount() {
-    console.log('were mounting')
+    
     this.props.setGameId(this.props.routeParams.id)
     this.props.setUpGame()
   }
 
   isPlayer() {
-    const { game, currentUser } = this.props
-    return game.players.filter((player) =>
-      player.userId === currentUser._id).length > 0
+      const { game, currentUser } = this.props
+      return game.players.filter((player) =>
+        player.userId === currentUser._id).length > 0
   }
 
   canJoin() {
-    if (this.isPlayer()) { return false }
-    const { game } = this.props
-    return game.players.length < 2         // this determines the amount of players that can join the game
+      if (this.isPlayer()) { return false }
+      const { game } = this.props
+      return game.players.length < 2         // this determines the amount of players that can join the game
   }
 
   joinGame() {
     const { game, saveGame, currentUser } = this.props
-    debugger
+
     saveGame(game, { players: game.players.concat({
       userId: currentUser._id,
       name: currentUser.name,
@@ -51,18 +51,19 @@ class Game extends Component {
     if (!!!game._id) { return null }
 
     if (this.canJoin()) {
+
       return (
-        <Paper zDepth={3} className="join-game">
-          <h3>Join this Game?</h3>
-          <p> {'Join '+ game.createdBy.name + ' in this game.'}</p>
-          <RaisedButton label="Join" primary={true} onClick={ this.joinGame.bind(this) } />
-          <Link to="/"><FlatButton label="Back to the Lobby" /></Link>
-        </Paper>
+          <Paper zDepth={3} className="join-game">
+            <h3>Join this Game?</h3>
+            <p> {'Join '+ game.createdBy.name + ' in this game.'}</p>
+            <RaisedButton label="Join" primary={true} onClick={ this.joinGame.bind(this) } />
+            <Link to="/"><FlatButton label="Back to the Lobby" /></Link>
+          </Paper>
       )
     }
 
     return (
-      <Canvas game={ game } currentUser={ currentUser } />
+        <Canvas game={ game } currentUser={ currentUser } />
     )
   }
 }

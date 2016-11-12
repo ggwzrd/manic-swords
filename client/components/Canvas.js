@@ -50,7 +50,7 @@ class Canvas extends React.Component {
     // we continuously draw all swords and players
     draw(){
         const { game, saveGame } = this.props
-	
+
 	const player1 = currentPlayer(this)
         const ctx = this.refs.canvas.getContext('2d')
         ctx.clearRect(0,0,WIDTH,HEIGHT)
@@ -59,6 +59,8 @@ class Canvas extends React.Component {
           window.setTimeout(function(){
             const collided = checkCollision(clientSwords, player1)
             if(collided.player.hasOwnProperty('isHit')){
+              const snd = new Audio('../audio/hit.wav')
+              snd.play()
               clientSwords = collided.swords
               saveGame(game, {swords: clientSwords, players: [otherPlayer(this)].concat(collided.player)})
             }
@@ -77,7 +79,6 @@ class Canvas extends React.Component {
       const swordImg = new Image()
       clientSwords = clientSwords.filter((sword) => sword.active ? sword : null)
       clientSwords.map((sword) => {
-
         // the falling class function increments the y-coordinates
         // of the swords each time we draw
         sword.falling()
@@ -111,8 +112,8 @@ class Canvas extends React.Component {
     render() {
         return (
           <div>
-            <Scoreboard />
-	    <div className="canvas-container">
+            <Scoreboard className='scoreboard'/>
+            <div className="canvas-container">
               <canvas ref="canvas" width={WIDTH} height={HEIGHT} />
             </div>
           </div>

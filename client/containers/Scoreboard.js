@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import './Scoreboard.sass'
+
+// material-ui
+import Avatar from 'material-ui/Avatar'
+import FontIcon from 'material-ui/FontIcon'
+import Paper from 'material-ui/Paper'
 
 //actions
 import saveGame from '../actions/update-game'
@@ -13,8 +19,7 @@ class Scoreboard extends Component {
       console.log('Scoreboard: I`m constructing')
          super()
          this.state = {
-           status: 'Waiting to start...',
-           timer: 5
+           timer: 6
            }
    }
 
@@ -31,7 +36,6 @@ class Scoreboard extends Component {
   }
 
   counter() {
-
       const { game, saveGame } = this.props
       let i = this.state.timer
 
@@ -60,33 +64,69 @@ class Scoreboard extends Component {
     }
   }
 
-  renderPlayers() {
+  renderGameStatus() {
+
+    const countDown = () => {
+      const { timer } = this.state
+
+      return (
+        <div>{ (timer === 6) ? 'Get ready!' : (timer > 0 ) ? timer : 'Move!' }</div>
+      )
+    }
+
     const player1 = currentPlayer(this)
     const player2 = otherPlayer(this)
 
+    // get hearts for each life
+    const hearts = (lifes) => {
+          let j = 0
+          let imageTagsArray = []
+          for( j = 0; j < lifes; j += 1 )  {
+            imageTagsArray.push('http://res.cloudinary.com/pvdh/image/upload/v1478892038/oHgSPgd_-_Imgur_nxjibc.png')
+          }
+      return(
+        imageTagsArray.map((img) => {
+          return <img src={ `${ img }` }></img>
+        })
+      )
+    }
+
     return (
-      <div>
-        <div>{ player1.name } : { player1.lifes }</div>
-        <div>{ player2 ? player2.name : 'Waiting for other player' } : { player2 ? player2.lifes : null }</div>
-      </div>
-    )
+          <Paper className='game-status' zDepth={5}>
 
-  }
+            <div className='status-player1'>
+              {/* PLAYER 1 */}
+              <Avatar
+                src={ "https://api.adorable.io/avatars/" + player1.name + ".png" }
+                size={120}
+                icon={<FontIcon className="muidocs-icon-communication-voicemail" />}
+              />
+              <div>{ player1.avatar } { player1.name } : { hearts(player1.lifes) }</div>
+            </div>
 
-  renderCountDown() {
-    const { timer } = this.state
+            <div className='count-down'>
+              { countDown() }
+            </div>
 
-    return (
-      <div>Countdown: { (timer > 0) ? timer : 'Move!' }</div>
-    )
+            <div className='status-player2'>
+              {/* PLAYER 2 */}
+              { player2 ? <Avatar
+                src={ "https://api.adorable.io/avatars/" + player2.name + ".png" }
+                size={120}
+                icon={<FontIcon className="muidocs-icon-communication-voicemail" />}
+                          /> : null }
+              <div> { player2 ? hearts(player2.lifes) : null } : { player2 ? player2.name : null } </div>
+            </div>
+
+          </Paper>
+      )
   }
 
   render() {
 
       return (
           <div className="scoreboard-container">
-            { this.renderCountDown.bind(this)() }
-            { this.renderPlayers.bind(this)() }
+            { this.renderGameStatus.bind(this)() }
           </div>
       )
     }
