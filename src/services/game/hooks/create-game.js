@@ -43,21 +43,21 @@ module.exports = function(options) {
       title: 'Air of War',
       current: true,
       speed: 1,
-      amount: 50
-    }
-    const level2 = {
-      title: 'Winter is coming',
-      current: false,
-      speed: 2,
-      amount: 150
-    }
-
-    const level3 = {
-      title: 'Winter is coming',
-      current: false,
-      speed: 4,
       amount: 300
     }
+    // const level2 = {
+    //   title: 'Winter is coming',
+    //   current: false,
+    //   speed: 2,
+    //   amount: 150
+    // }
+    //
+    // const level3 = {
+    //   title: 'Winter is coming',
+    //   current: false,
+    //   speed: 4,
+    //   amount: 300
+    // }
 
     const swords = randomize(level1)
 
@@ -66,7 +66,7 @@ module.exports = function(options) {
     hook.data.swords = swords
 
     // Add the all the levels to the game
-    hook.data.levels = [level1, level2, level3]
+    hook.data.levels = [level1]
     // Add the logged in user as the first player
     hook.data.players = [{
       userId: user._id,

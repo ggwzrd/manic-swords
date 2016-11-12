@@ -73,18 +73,19 @@ module.exports = function(options) {
     //   }
     // })
     // //
-    // let index = winnerId.length > 1 ? null : winnerId[0]
-    // hook.data.winner = updatedPlayers.map((player) => player._id).indexOf(index)
+    // winnerId = winnerId.length > 1 ? null : winnerId[0]
+    // hook.data.winner = updatedPlayers.map((player) => player._id).indexOf(winnerId)
 
     if(isGameOver(updatedPlayers)){
       hook.data.ended = true
-    }else{
-      if(swords.length <= 0 && hook.data.started){
-        hook.data.started = false
-        hook.data.levels.shift()
-        hook.data.levels[0].current = true
-        hook.data.swords = randomize(hook.data.levels[0])
-      }
     }
+    // else{
+    //   if(swords.length <= 0 && hook.data.started){
+    //     hook.data.started = false
+    //     hook.data.levels.shift()
+    //     hook.data.levels[0].current = true
+    //     hook.data.swords = randomize(hook.data.levels[0])
+    //   }
+    // }
   }
 }
