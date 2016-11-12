@@ -27,6 +27,13 @@ class Scoreboard extends Component {
   }
 
   componentDidUpdate () {
+        if ( !game.started ) {
+          // super()
+          this.state = {
+            timer: 6
+            }
+        }
+
         console.log('Scoreboard: updated')
         const i = this.state.timer
         if (i === 6){

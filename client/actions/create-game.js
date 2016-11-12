@@ -6,6 +6,9 @@ export const GAME_CREATED = 'GAME_CREATED'
 export default () => {
   return dispatch => {
     model.dispatch = dispatch
+    model.service.on('created', (resource) => {
+      return history.push(`/game/${resource._id}`)
+    })
     model.app.authenticate()
       .then((response) => {
         model.create()
