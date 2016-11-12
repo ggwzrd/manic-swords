@@ -21,6 +21,7 @@ let titles = [
   '',
   'Air of war',
   'Winter is coming',
+  'Prepare for war',
   'Swords madness',
   'Massive blood',
 ]
@@ -48,10 +49,9 @@ class Canvas extends React.Component {
       }.bind(this))
 
       setInterval(function () {
-        SPEED = game.level.speed + 1
         saveGame(game, {level: { speed: SPEED, title: titles[SPEED] }})
         console.log('level changed')
-      }, 10000);
+      }, 30000);
       // here we trigger the draw function for the first time
       // we should call this at least once to start the loop
       // to continuously trigger the drawPlayer and drawSwords functions
@@ -62,7 +62,7 @@ class Canvas extends React.Component {
     //
     componentDidUpdate() {
       const { game } = this.props
-
+      SPEED = game.level.speed + 1
       if(game.started){
         // this.startCleaning.bind(this)()
       }

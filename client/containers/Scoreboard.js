@@ -109,30 +109,32 @@ class Scoreboard extends Component {
     }
 
     return (
-          <Paper className='game-status' zDepth={5}>
+          <Paper className='game-status' zDepth={1}>
 
-            <div className='status-player1'>
+            <div className='status-player'>
               {/* PLAYER 1 */}
+              <h3>{ !!player1 ? player1.name : null }</h3>
               <Avatar
                 src={ "https://api.adorable.io/avatars/" + player1.name + ".png" }
                 size={120}
                 icon={<FontIcon className="muidocs-icon-communication-voicemail" />}
               />
-              <div>{ player1.avatar } { player1.name } : { hearts(player1.lifes) }</div>
+              <div>{ hearts(player1.lifes) }</div>
             </div>
 
             <div className='count-down'>
               { game.started ? game.level.title : countDown() }
             </div>
 
-            <div className='status-player2'>
+            <div className='status-player'>
               {/* PLAYER 2 */}
+              <h3>{ !!player2 ? player2.name : null }</h3>
               { !!player2 ? <Avatar
                 src={ "https://api.adorable.io/avatars/" + player2.name + ".png" }
                 size={120}
                 icon={<FontIcon className="muidocs-icon-communication-voicemail" />}
-                           /> : null }
-              <div> { !!player2 ? hearts(player2.lifes) : null } : { !!player2 ? player2.name : null } </div>
+                            /> : null }
+              <div className="lifes"> { !!player2 ? hearts(player2.lifes) : null } </div>
             </div>
 
           </Paper>
