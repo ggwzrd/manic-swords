@@ -105,9 +105,10 @@ class Canvas extends React.Component {
         // the falling class function increments the y-coordinates
         // of the swords each time we draw
         sword.falling()
-        swordImg.src = sword.image
-        if(sword.active)
+        if(sword.active && sword.position.y > 0 ){
+          swordImg.src = sword.image
           ctx.drawImage(swordImg, sword.position.x, sword.position.y)
+        }
       })
     }
 
