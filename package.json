@@ -18,8 +18,9 @@
   "scripts": {
     "clean": "rimraf static",
     "copy:favicon": "cp client/favicon.ico static/favicon.ico",
+    "copy:audio": "cp -r client/audio static/",
     "build:webpack": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
-    "build": "npm run clean && npm run build:webpack && npm run copy:favicon",
+    "build": "npm run clean && npm run build:webpack && npm run copy:favicon && npm run copy:audio",
     "test": "npm run jshint && npm run mocha",
     "jshint": "jshint src/. test/. --config",
     "start": "node src/",
