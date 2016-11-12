@@ -38,7 +38,7 @@ class Canvas extends React.Component {
       }.bind(this))
       setInterval(function () {
         cleanDisabledSword(this, game,  clientSwords)
-      }.bind(this), 5000);
+      }.bind(this), 1000);
       // here we trigger the draw function for the first time
       // we should call this at least once to start the loop
       // to continuously trigger the drawPlayer and drawSwords functions
@@ -52,27 +52,26 @@ class Canvas extends React.Component {
     }
     // we continuously draw all swords and players
     draw(){
-(??)        const { game, saveGame } = this.props
-(??)	
-(??)	const player1 = currentPlayer(this)
-(??)        const ctx = this.refs.canvas.getContext('2d')
-(??)        ctx.clearRect(0,0,WIDTH,HEIGHT)
+      const { game, saveGame } = this.props
 
-(??)        if(!player1.isDead) {
-(??)          window.setTimeout(function(){
-(??)            const collided = checkCollision(clientSwords, player1)
-(??)            if(collided.player.hasOwnProperty('isHit')){
-	   	  const snd = new Audio('../audio/hit.wav')
-                  snd.play()
-(??)              clientSwords = collided.swords
-(??)              saveGame(game, {swords: clientSwords, players: [otherPlayer(this)].concat(collided.player)})
-(??)            }
-(??)          }.bind(this), 700);
-(??)        }
-(??)        if(game.started) this.drawSwords()
+	    const player1 = currentPlayer(this)
+      const ctx = this.refs.canvas.getContext('2d')
+      ctx.clearRect(0,0,WIDTH,HEIGHT)
 
+      if(!player1.isDead) {
+        window.setTimeout(function(){
+          const collided = checkCollision(clientSwords, player1)
+          if(collided.player.hasOwnProperty('isHit')){
+  	   	     const snd = new Audio('../audio/hit.wav')
+             snd.play()
+             clientSwords = collided.swords
+             saveGame(game, {swords: clientSwords, players: [otherPlayer(this)].concat(collided.player)})
+          }
+        }.bind(this), 700);
+      }
+      if(game.started) this.drawSwords()
 
-        this.drawPlayers()
+      this.drawPlayers()
 
       window.requestAnimationFrame(this.draw.bind(this))
     }
