@@ -38,7 +38,7 @@ class Canvas extends React.Component {
       }.bind(this))
       setInterval(function () {
         cleanDisabledSword(this, game,  clientSwords)
-      }.bind(this), 1000);
+      }.bind(this), 5000)
       // here we trigger the draw function for the first time
       // we should call this at least once to start the loop
       // to continuously trigger the drawPlayer and drawSwords functions

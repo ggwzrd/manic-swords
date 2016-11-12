@@ -79,9 +79,12 @@ module.exports = function(options) {
     if(isGameOver(updatedPlayers)){
       hook.data.ended = true
     }else{
-      hook.data.started = false
-      hook.data.levels = levels.shift()
-      levels.length <= 0 ? hook.data.ended = true : hook.data.swords = randomize(levels[0])
+      if(swords.length <= 0 && hook.data.started){
+        hook.data.started = false
+        hook.data.levels.shift()
+        hook.data.levels[0].current = true
+        hook.data.swords = randomize(hook.data.levels[0])
+      }
     }
   }
 }

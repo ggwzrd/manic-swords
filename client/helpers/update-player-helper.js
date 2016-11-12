@@ -17,12 +17,11 @@ export const otherPlayer = (_self) => {
 export const updatePlayer = (_self, event) => {
 
     const { saveGame, game } = _self.props
-    const { players } = game.players
 
     const player1 = currentPlayer(_self)
     const player2 = otherPlayer(_self)
 
-    if(!!!player1 || player1.isDead){ return false }
+    if(!!!player1 || player1.isDead || !game.started){ return false }
 
     const positionX = player1.position.x
     const positionY = player1.position.y
