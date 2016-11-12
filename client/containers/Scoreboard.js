@@ -119,7 +119,7 @@ class Scoreboard extends Component {
                 size={120}
                 icon={<FontIcon className="muidocs-icon-communication-voicemail" />}
               />
-              <div>{ hearts(player1.lifes) }</div>
+              <div className="lifes">{ hearts(player1.lifes) }</div>
             </div>
 
             <div className='count-down'>
