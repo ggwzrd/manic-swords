@@ -73,7 +73,7 @@ module.exports = function(options) {
       name: user.name,
       puppet: 'http://i.imgur.com/GIhH6JQ.png',
       position:{
-        x: randomNumBetween(100, 800),
+        x: randomNumBetween(100, 700),
         y: 450
       }
     }];

@@ -7,6 +7,28 @@
 
 const defaults = {};
 
+function randomNumBetween(min, max) {
+  return Math.round((Math.random() * (max - min + 1) + min))
+}
+
+function randomize(level) {
+  const swords = []
+  const step = 800 / level.amount
+  let i = 0
+  // randomize the position of the swords
+  for(i = 0; i < level.amount; i++ ){
+    swords.push({
+      active: true,
+      image: 'http://i.imgur.com/U4dKMGW.png',
+      position: {
+        x: randomNumBetween(40 + (step * i), step * i),
+        y: randomNumBetween(-50, -(50 * level.amount))
+      }
+    })
+  }
+  return swords
+}
+
 const isDead = (player) => {
   return player.lifes <= 0 ? true : false
 }
@@ -25,7 +47,7 @@ const removeLife = (players) => {
 
 const isGameOver = (players) => {
   return players.reduce((prevPlayer, nextPlayer) => {
-    return nextPlayer.isDead
+    return prevPlayer.idDead === true && nextPlayer.isDead === true ? true : false
   }, false)
 }
 
@@ -45,17 +67,21 @@ module.exports = function(options) {
     const levels = hook.data.levels;
 
     let updatedPlayers = removeLife(players)
-    hook.data.winner = players.indexOf(updatedPlayers.reduce((prevPlayer, nextPlayer) => {
-      if(prevPlayer.isDead){
-        return nextPlayer
-      }else{
-        return isDead(nextPlayer) ?
-          prevPlayer : {}
-      }
-    }, {}))
+    // let winnerId = updatedPlayers.filter((player) => {
+    //   if (!player.isDead){
+    //     return player._id
+    //   }
+    // })
+    // //
+    // let index = winnerId.length > 1 ? null : winnerId[0]
+    // hook.data.winner = updatedPlayers.map((player) => player._id).indexOf(index)
 
     if(isGameOver(updatedPlayers)){
       hook.data.ended = true
+    }else{
+      hook.data.started = false
+      hook.data.levels = levels.shift()
+      levels.length <= 0 ? hook.data.ended = true : hook.data.swords = randomize(levels[0])
     }
   }
 }

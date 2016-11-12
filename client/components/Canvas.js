@@ -8,7 +8,7 @@ import Scoreboard from '../containers/Scoreboard'
 
 // helpers
 import { updatePlayer, currentPlayer, otherPlayer } from '../helpers/update-player-helper'
-import { checkCollision } from '../helpers/game-helper'
+import { checkCollision, cleanDisabledSword } from '../helpers/game-helper'
 
 // models [still empty]
 import Player from '../models/PlayerModel'
@@ -31,11 +31,15 @@ class Canvas extends React.Component {
     // when the component has mounted
     componentDidMount() {
        // we draw the players for the first time
+       const { game } = this.props
       this.drawPlayers()
+      console.log('Hey, we`re MOUNTING')
       window.addEventListener( 'keydown', function(event) {
         updatePlayer(this, event)
       }.bind(this))
-
+      setInterval(function () {
+        cleanDisabledSword(this, game,  clientSwords)
+      }.bind(this), 5000);
       // here we trigger the draw function for the first time
       // we should call this at least once to start the loop
       // to continuously trigger the drawPlayer and drawSwords functions
@@ -49,33 +53,32 @@ class Canvas extends React.Component {
     }
     // we continuously draw all swords and players
     draw(){
-        const { game, saveGame } = this.props
-	
-	const player1 = currentPlayer(this)
-        const ctx = this.refs.canvas.getContext('2d')
-        ctx.clearRect(0,0,WIDTH,HEIGHT)
+      const { game, saveGame } = this.props
 
-        if(!player1.isDead) {
-          window.setTimeout(function(){
-            const collided = checkCollision(clientSwords, player1)
-            if(collided.player.hasOwnProperty('isHit')){
-              clientSwords = collided.swords
-              saveGame(game, {swords: clientSwords, players: [otherPlayer(this)].concat(collided.player)})
-            }
-          }.bind(this), 500);
-        }
-        if(game.started) this.drawSwords()
+	    const player1 = currentPlayer(this)
+      const ctx = this.refs.canvas.getContext('2d')
+      ctx.clearRect(0,0,WIDTH,HEIGHT)
 
-        this.drawPlayers()
+      if(!player1.isDead) {
+        window.setTimeout(function(){
+          const collided = checkCollision(clientSwords, player1)
+          if(collided.player.hasOwnProperty('isHit')){
+            clientSwords = collided.swords
+            saveGame(game, {swords: clientSwords, players: [otherPlayer(this)].concat(collided.player)})
+          }
+        }.bind(this), 700);
+      }
 
-        window.requestAnimationFrame(this.draw.bind(this))
+      this.drawSwords()
+      this.drawPlayers()
+
+      window.requestAnimationFrame(this.draw.bind(this))
     }
 
     // this is how we draw swords
     drawSwords() {
       const ctx = this.refs.canvas.getContext('2d')
       const swordImg = new Image()
-      clientSwords = clientSwords.filter((sword) => sword.active ? sword : null)
       clientSwords.map((sword) => {
 
         // the falling class function increments the y-coordinates
@@ -112,7 +115,7 @@ class Canvas extends React.Component {
         return (
           <div>
             <Scoreboard />
-	    <div className="canvas-container">
+            <div className="canvas-container">
               <canvas ref="canvas" width={WIDTH} height={HEIGHT} />
             </div>
           </div>

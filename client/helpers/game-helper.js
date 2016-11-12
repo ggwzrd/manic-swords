@@ -17,6 +17,13 @@ export const randomNumBetweenExcluding = (min, max, exMin, exMax) => {
   return random
 }
 
+export const cleanDisabledSword = (_self, game, swords) => {
+  _self.props.saveGame(game, {swords: swords.filter((s) => s.isActive())})
+}
+
+// export const isLevelCompleted = (swords) => {
+//   return swords.filter((s) => s.isActive()).length === 0
+// }
 
 
 export const checkCollision = (swords, player) => {

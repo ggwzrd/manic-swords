@@ -47,7 +47,7 @@ const gameSchema = new Schema({
   started: { type: Boolean, required: true, 'default': false },
   counter: { type: Number, required: true, 'default': 5},
   ended: { type: Boolean, required: true, 'default': false },
-  winner: { type: Number, required: false },                      // == player = {}
+  winner: { type: Number, required: false},                      // == player = {}
   createdAt: { type: Date, 'default': Date.now },
   updatedAt: { type: Date, 'default': Date.now },
   userId: { type: Schema.Types.ObjectId, ref: 'user' },
