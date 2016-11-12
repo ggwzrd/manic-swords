@@ -43,7 +43,7 @@ module.exports = function(options) {
       title: 'Air of War',
       current: true,
       speed: 1,
-      amount: 1000
+      amount: 300
     }
     // const level2 = {
     //   title: 'Winter is coming',
