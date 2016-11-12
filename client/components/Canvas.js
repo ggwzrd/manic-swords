@@ -62,7 +62,8 @@ class Canvas extends React.Component {
     //
     componentDidUpdate() {
       const { game } = this.props
-      SPEED = game.level.speed + 1
+
+      if(SPEED <= 5){ SPEED = game.level.speed + 1 }
       if(game.started){
         // this.startCleaning.bind(this)()
       }
