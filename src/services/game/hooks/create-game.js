@@ -43,7 +43,7 @@ module.exports = function(options) {
       title: 'Air of War',
       current: true,
       speed: 1,
-      amount: 300
+      amount: 50
     }
     // const level2 = {
     //   title: 'Winter is coming',
@@ -68,7 +68,7 @@ module.exports = function(options) {
     // Add the all the levels to the game
     hook.data.levels = [level1]
     // Add the logged in user as the first player
-    hook.data.players = [{
+    hook.data.playerOne = {
       userId: user._id,
       name: user.name,
       puppet: 'http://i.imgur.com/GIhH6JQ.png',
@@ -76,7 +76,7 @@ module.exports = function(options) {
         x: randomNumBetween(100, 700),
         y: 450
       }
-    }];
+    };
 
   };
 };

@@ -39,7 +39,7 @@ class Scoreboard extends Component {
         //
         console.log('Scoreboard: updated')
         const i = this.state.timer
-        if (i === 6){
+        if (i === 6 ){
           const snd = new Audio('../audio/ready.wav')
           snd.play()
           this.counter()
@@ -48,13 +48,15 @@ class Scoreboard extends Component {
 
   counter() {
       const { game, saveGame } = this.props
+      const { playerTwo } = game
+
       let i = this.state.timer
 
       // check here if the game has:
       // not yet started
       // if the other player joined
       // if true we start the timer
-      if (!game.started && (game.players.length >= 2) && !game.ended) {
+      if (!game.started && !!playerTwo && !game.ended) {
 
         // count down
         const intId = setInterval(() => {
@@ -78,9 +80,11 @@ class Scoreboard extends Component {
 
   renderGameStatus() {
 
-    const player1 = currentPlayer(this)
-    const player2 = otherPlayer(this)
     const { game } = this.props
+    const { playerOne, playerTwo } = game
+    const player1 = playerOne
+    const player2 = playerTwo
+
 
     const countDown = () => {
       const { timer } = this.state
@@ -123,12 +127,12 @@ class Scoreboard extends Component {
 
             <div className='status-player2'>
               {/* PLAYER 2 */}
-              { player2 ? <Avatar
+              { !!player2 ? <Avatar
                 src={ "https://api.adorable.io/avatars/" + player2.name + ".png" }
                 size={120}
                 icon={<FontIcon className="muidocs-icon-communication-voicemail" />}
-                          /> : null }
-              <div> { player2 ? hearts(player2.lifes) : null } : { player2 ? player2.name : null } </div>
+                           /> : null }
+              <div> { !!player2 ? hearts(player2.lifes) : null } : { !!player2 ? player2.name : null } </div>
             </div>
 
           </Paper>

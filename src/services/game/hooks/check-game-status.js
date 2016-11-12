@@ -63,7 +63,7 @@ module.exports = function(options) {
 
   return function(hook) {
     const swords = hook.data.swords;
-    const players = hook.data.players;
+    const players = [hook.data.playerOne, hook.data.playerTwo];
     const levels = hook.data.levels;
 
     let updatedPlayers = removeLife(players)

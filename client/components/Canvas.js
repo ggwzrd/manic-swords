@@ -21,7 +21,7 @@ let clientSwords = []
 class Canvas extends React.Component {
 
     componentWillMount(){
-        const { swords, players, levels } = this.props.game
+        const { swords, levels } = this.props.game
         clientSwords = swords.map((sword) => {
           return new Sword(sword, levels[0])
         })
@@ -64,11 +64,14 @@ class Canvas extends React.Component {
 
     // we continuously draw all swords and players
     draw(){
-      const { game, saveGame } = this.props
+      const { game, saveGame, currentUser } = this.props
+      const { playerOne, playerTwo } = game
 
 	    const player1 = currentPlayer(this)
+
       const ctx = this.refs.canvas.getContext('2d')
       ctx.clearRect(0,0,WIDTH,HEIGHT)
+
 
       if(!player1.isDead) {
         window.setTimeout(function(){
@@ -77,7 +80,13 @@ class Canvas extends React.Component {
   	   	     const snd = new Audio('../audio/hit.wav')
              snd.play()
              clientSwords = collided.swords
-             saveGame(game, {swords: clientSwords, players: [otherPlayer(this)].concat(collided.player)})
+
+             if (currentUser._id === playerOne.userId) {
+               saveGame(game, {swords: clientSwords, playerOne: collided.player })
+             }
+             if (currentUser._id === playerTwo.userId) {
+               saveGame(game, {swords: clientSwords, playerTwo: collided.player })
+             }
           }
         }.bind(this), 700);
       }
@@ -104,22 +113,22 @@ class Canvas extends React.Component {
 
     // this is how we draw players
     drawPlayers() {
-        const { players } = this.props.game
+        const { playerOne, playerTwo } = this.props.game
         const ctx = this.refs.canvas.getContext('2d')
 
-        if(!players[0].isDead) {
+        if(!playerOne.isDead) {
           const puppet1 = new Image()
-          puppet1.src = players[0].puppet
+          puppet1.src = playerOne.puppet
 
-          ctx.drawImage(puppet1, players[0].position.x, players[0].position.y)
+          ctx.drawImage(puppet1, playerOne.position.x, playerOne.position.y)
         }
 
-        if(players.length < 2 || players[1].isDead){ return }
+        if( !playerTwo || playerTwo.isDead){ return }
 
         const puppet2 = new Image()
-        puppet2.src = players[1].puppet
+        puppet2.src = playerTwo.puppet
 
-        ctx.drawImage(puppet2, players[1].position.x, players[1].position.y)
+        ctx.drawImage(puppet2, playerTwo.position.x, playerTwo.position.y)
 
     }
 

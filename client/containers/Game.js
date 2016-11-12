@@ -14,26 +14,31 @@ import Canvas from '../components/Canvas'
 
 class Game extends Component {
   componentWillMount() {
-    
+
     this.props.setGameId(this.props.routeParams.id)
     this.props.setUpGame()
   }
 
   isPlayer() {
       const { game, currentUser } = this.props
-      return game.players.filter((player) =>
+      const { playerOne, playerTwo } = game
+      const players = [playerOne]
+
+      !!playerTwo ? players.push(playerTwo) : null
+
+      return players.filter((player) =>
         player.userId === currentUser._id).length > 0
   }
 
   canJoin() {
       if (this.isPlayer()) { return false }
       const { game } = this.props
-      return game.players.length < 2         // this determines the amount of players that can join the game
+      return !!!game.playerTwo         // this determines the amount of players that can join the game
   }
 
   joinGame() {
     const { game, saveGame, currentUser } = this.props
-    saveGame(game, { players: game.players.concat({
+    saveGame(game, { playerTwo: {
       userId: currentUser._id,
       name: currentUser.name,
       puppet: 'http://i.imgur.com/Gz6uk6O.png',
@@ -41,7 +46,7 @@ class Game extends Component {
         x: randomNumBetween(100, 700),
         y: 450
       }
-    })})
+    }})
   }
 
   render() {
