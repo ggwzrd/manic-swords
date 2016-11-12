@@ -88,8 +88,8 @@ class Scoreboard extends Component {
             imageTagsArray.push('http://res.cloudinary.com/pvdh/image/upload/v1478892038/oHgSPgd_-_Imgur_nxjibc.png')
           }
       return(
-        imageTagsArray.map((img) => {
-          return <img src={ `${ img }` }></img>
+        imageTagsArray.map((img, index) => {
+          return <img key={ index } src={ `${ img }` }></img>
         })
       )
     }
