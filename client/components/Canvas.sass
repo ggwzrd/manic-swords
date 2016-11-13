@@ -1,9 +1,32 @@
-
-canvas
-  background: url("http://i.imgur.com/ANz8O5g.png")
-  background-size: contain
-  margin: 0
-  padding: 0
-  margin-left: 100px
-  margin-top: 50px
+.canvas-container
   position: absolute
+  width: 1025
+  height: 600
+  background: url(http://img13.deviantart.net/4b7d/i/2012/357/f/8/fantasy_landscape_by_atthespeedoffetus-d5oxc97.png) no-repeat
+  background-size: cover
+  z-index: 5
+
+  .game-over
+    position: absolute
+    width: 1025
+    height: 600
+    display: flex
+    justify-content: center
+    align-items: center
+    background-color: rgba(0, 0, 0, 0.65)
+    transition: 1s
+    z-index: 100
+
+    h1
+      font-size: 100px
+      color: white
+
+  canvas
+    background: url("http://i.imgur.com/ANz8O5g.png")
+    background-size: contain
+    margin: 0
+    padding: 0
+    margin-left: 100px
+    margin-top: 50px
+    position: absolute
+    z-index: 50

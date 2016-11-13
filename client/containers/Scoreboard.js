@@ -40,8 +40,7 @@ class Scoreboard extends Component {
         console.log('Scoreboard: updated')
         const i = this.state.timer
         if (i === 6 ){
-          const snd = new Audio('../audio/ready.wav')
-          snd.play()
+          
           this.counter()
         }
   }

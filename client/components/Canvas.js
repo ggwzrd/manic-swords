@@ -24,6 +24,7 @@ let titles = [
   'Prepare for war',
   'Swords madness',
   'Massive blood',
+  'The End',
 ]
 let SPEED = 0
 
@@ -49,7 +50,7 @@ class Canvas extends React.Component {
       }.bind(this))
 
       setInterval(function () {
-        saveGame(game, {level: { speed: SPEED, title: titles[SPEED] }})
+        saveGame(game, {level: { speed: SPEED, title: titles[SPEED] }, swords: clientSwords})
         console.log('level changed')
       }, 30000);
       // here we trigger the draw function for the first time
@@ -63,22 +64,13 @@ class Canvas extends React.Component {
     componentDidUpdate() {
       const { game } = this.props
 
-      if(SPEED <= 5){ SPEED = game.level.speed + 1 }
+      if(SPEED < 5){ SPEED = game.level.speed + 1 }
       if(game.started){
         // this.startCleaning.bind(this)()
       }
     }
 
-    startCleaning (){
-      const { game } = this.props
-      const cleaningSwords = setInterval(function () {
-        cleanDisabledSword(this, game,  clientSwords)
-        if(!game.started){
-          clearInterval(cleaningSwords)
-        }
-      }.bind(this), 5000)
-    }
-
+    
     // we continuously draw all swords and players
     draw(){
       const { game, saveGame, currentUser } = this.props
@@ -105,9 +97,9 @@ class Canvas extends React.Component {
                saveGame(game, {swords: clientSwords, playerTwo: collided.player })
              }
           }
-        }.bind(this), 700);
+        }.bind(this), 300);
       }
-      if(game.started) this.drawSwords()
+      if(game.started && !game.ended) this.drawSwords()
 
       this.drawPlayers()
 
@@ -151,10 +143,12 @@ class Canvas extends React.Component {
     }
 
     render() {
+      const { game } = this.props
         return (
           <div>
             <Scoreboard className='scoreboard'/>
             <div className="canvas-container">
+              {game.ended ? <div className="game-over"><h1>GAME OVER</h1></div> : null }
               <canvas ref="canvas" width={WIDTH} height={HEIGHT} />
             </div>
           </div>
