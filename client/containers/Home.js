@@ -20,7 +20,7 @@ class Home extends Component {
     const { userName } = this.props
     return(
       <div className="home">
-        <Title label={ userName ? "Welcome, "+userName : "Welcome, Stranger"} />
+        <Title label={ userName ? "Join the adventure, "+userName : "Sign up to play"} />
         <GamesList />
       </div>
     )

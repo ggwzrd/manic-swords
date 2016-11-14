@@ -36,6 +36,8 @@ class GameList extends Component {
 
   renderGames(game, index){
     const { deleteGame, currentUser } = this.props
+
+    if(game.ended){ return }
     return(
         <Paper key={index} className="game container" zDepth={1} >
           <FloatingActionButton mini={true} style={{float: 'right'}} type="button" onClick={ deleteGame.bind(this, game) } disabled={ currentUser._id !== game.createdBy._id } >

@@ -47,8 +47,8 @@ const removeLife = (players) => {
 
 const isGameOver = (players) => {
   return players.reduce((prevPlayer, nextPlayer) => {
-    return prevPlayer.idDead === true && nextPlayer.isDead === true ? true : false
-  }, false)
+    return prevPlayer === true && nextPlayer.isDead === true ? true : false
+  }, true)
 }
 
 

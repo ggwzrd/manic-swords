@@ -38,6 +38,9 @@ class Game extends Component {
 
   joinGame() {
     const { game, saveGame, currentUser } = this.props
+
+    const snd = new Audio('../audio/ready.wav')
+    snd.play()
     saveGame(game, { playerTwo: {
       userId: currentUser._id,
       name: currentUser.name,
