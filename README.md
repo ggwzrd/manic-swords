@@ -42,10 +42,11 @@ Getting up and running is as easy as 1, 2, 3.
     ```
     npm start
     ```
+    
 ## Database Structure
 
 ## Help
 
-For questions, suggestions or other remarks contact Giulio or Pim here on Github or create a pull request
+For questions, suggestions or other remarks contact Giulio or Pim here on Github or create a pull request.
 For more information on all the things you can do with Feathers visit [docs.feathersjs.com](http://docs.feathersjs.com).
 
