@@ -20,7 +20,7 @@ WORK IN PROGRESS
 5. Authorization using Feathers.
 6. Managing the data flow with React-redux.
 
-## Getting started locally
+## Getting started
 
 Getting up and running is as easy as 1, 2, 3.
 
