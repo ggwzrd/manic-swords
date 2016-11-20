@@ -1,5 +1,5 @@
 {
-  "host": "MemoryGame-app.feathersjs.com",
+  "host": "ManicSwords-app.feathersjs.com",
   "port": 5000,
   "mongodb": "MONGODB_URL",
   "public": "../static/",

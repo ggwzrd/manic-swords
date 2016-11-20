@@ -1,6 +1,6 @@
 {
-  "name": "MemoryGame",
-  "description": "Multiplayer Memory Game with React and FeathersJS.",
+  "name": "ManicSwords",
+  "description": "Multiplayer Game with swords React and FeathersJS.",
   "version": "0.0.0",
   "homepage": "",
   "main": "src/",

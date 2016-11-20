@@ -48,7 +48,10 @@ class Canvas extends React.Component {
        // we draw the players for the first time
       const { game, saveGame } = this.props
       this.drawPlayers()
+
       // TODO it is if though the payer is saved twice for each move
+      // once GAME_UPDATED action type for sending data, and one GAME_UPDATED action type for receiving
+
       window.addEventListener( 'keydown', function(event) {
         updatePlayer(this, event)
       }.bind(this))
@@ -73,7 +76,8 @@ class Canvas extends React.Component {
     componentDidUpdate() {
       const { game } = this.props
 
-      // TODO we raise the speed with each update_game ??
+      // TODO we raise the speed with each update_game ?
+      // TODO can we refactor this?
       if(SPEED < 5){ SPEED = game.level.speed + 1 }
       // if(game.started){
       //   // this.startCleaning.bind(this)()
