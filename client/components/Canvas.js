@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+
 import saveGame from '../actions/update-game'
 import './Canvas.sass'
 
@@ -43,7 +44,7 @@ class Canvas extends React.Component {
     // when the component has mounted
     componentDidMount() {
        // we draw the players for the first time
-       const { game, saveGame } = this.props
+      const { game, saveGame } = this.props
       this.drawPlayers()
       window.addEventListener( 'keydown', function(event) {
         updatePlayer(this, event)
@@ -70,7 +71,7 @@ class Canvas extends React.Component {
       }
     }
 
-    
+
     // we continuously draw all swords and players
     draw(){
       const { game, saveGame, currentUser } = this.props
@@ -148,7 +149,7 @@ class Canvas extends React.Component {
           <div>
             <Scoreboard className='scoreboard'/>
             <div className="canvas-container">
-              {game.ended ? <div className="game-over"><h1>GAME OVER</h1></div> : null }
+              { game.ended ? <div className="game-over"><h1>GAME OVER</h1></div> : null }
               <canvas ref="canvas" width={WIDTH} height={HEIGHT} />
             </div>
           </div>

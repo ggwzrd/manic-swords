@@ -40,7 +40,8 @@ class GameList extends Component {
     if(game.ended){ return }
     return(
         <Paper key={index} className="game container" zDepth={1} >
-          <FloatingActionButton mini={true} style={{float: 'right'}} type="button" onClick={ deleteGame.bind(this, game) } disabled={ currentUser._id !== game.createdBy._id } >
+          <FloatingActionButton mini={ true } style={{ float: 'right '}} type="button" onClick={ deleteGame.bind(this, game) }
+              disabled={ currentUser._id !== game.createdBy._id } >
             <ContentRemove style={{'fontSize': '10px'}} />
           </FloatingActionButton>
           <Link to={ `profile/${game.createdBy._id }`} >
