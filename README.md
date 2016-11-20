@@ -4,21 +4,23 @@
 
 ## About
 
-This project was made as exercise to learn React.js and improve our skills with Javascript.
+Manic Swords is an exercise project to learn React.js and improve our skills with Javascript.
 We used [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
+
+The game involves two players and swords falling from the sky maniacally. Avoid the swords to survive. Last man standing wins the game. Please turn on your sound!
 
 WORK IN PROGRESS
 
-## Main Challenges
+## Main challenges
 
-1. Dynamic drawing in HTML5 Canvas updated each animation frame.
-2. Move player in synchronous in both user screen via POST server request and Socket IO.
+1. Dynamic drawing in HTML5 Canvas: updating each animation frame.
+2. Moving players synchronously in both user screens via POST server request and Socket IO.
 3. Constantly think about performances and how to improve it.
 4. Full-stack JS application with NodeJS as Backend.
 5. Authorization using Feathers.
 6. Managing the data flow with React-redux.
 
-## Getting Started
+## Getting started locally
 
 Getting up and running is as easy as 1, 2, 3.
 
@@ -28,30 +30,22 @@ Getting up and running is as easy as 1, 2, 3.
     ```
     cd path/to/project; npm install
     ```
-
-3. Start your app
+3. Install monogodb (if not installed already)
+  ```
+  ```
+4. Start mongodb (if not running already)
+  ```
+  sudo service mongod start
+  ```
+5. Start your app
 
     ```
     npm start
     ```
-
-## Testing
-
-Simply run `npm test` and all your tests in the `test/` directory will be run.
-
-## Scaffolding
-
-Feathers has a powerful command line interface. Here are a few things it can do:
-
-```
-$ npm install -g feathers-cli             # Install Feathers CLI
-
-$ feathers generate service               # Generate a new Service
-$ feathers generate hook                  # Generate a new Hook
-$ feathers generate model                 # Generate a new Model
-$ feathers help                           # Show all commands
-```
+## Database Structure
 
 ## Help
 
+For questions, suggestions or other remarks contact Giulio or Pim here on Github or create a pull request
 For more information on all the things you can do with Feathers visit [docs.feathersjs.com](http://docs.feathersjs.com).
+
