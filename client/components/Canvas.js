@@ -53,10 +53,6 @@ class Canvas extends React.Component {
         updatePlayer(this, event)
       }.bind(this))
 
-      setInterval(function () {
-        saveGame(game, {level: { speed: SPEED, title: titles[SPEED] }, swords: clientSwords})
-        console.log('level changed')
-      }, 30000);
       // here we trigger the draw functions for the first time
       // we should call this at least once to start the loop
       // to continuously trigger the drawPlayer and drawSwords functions
@@ -64,6 +60,14 @@ class Canvas extends React.Component {
       this.draw()
       // same goes for updateSwords()
       this.updateSwords()
+
+      // here we update the level
+      // but only if the game has not ended
+      if ( game.ended ? ) { return }
+      setInterval(function () {
+        saveGame(game, {level: { speed: SPEED, title: titles[SPEED] }, swords: clientSwords})
+        console.log('level changed')
+      }, 30000)
     }
 
     componentDidUpdate() {
@@ -78,14 +82,19 @@ class Canvas extends React.Component {
 
     //TODO WIP it looks like the swords aren't updated now.
     updateSwords() {
+      const { game, saveGame, currentUser } = this.props
+      const { playerOne, playerTwo } = game
+	    const player1 = currentPlayer(this)
+
       if(!player1.isDead) {
         window.setTimeout(function(){
           const collided = checkCollision(clientSwords, player1)
+          console.log('checking collision')
           if(collided.player.hasOwnProperty('isHit')){
              const snd = new Audio('../audio/hit.wav')
              snd.play()
              clientSwords = collided.swords
-
+             console.log('collided!')
              if (currentUser._id === playerOne.userId) {
                saveGame(game, {swords: clientSwords, playerOne: collided.player })
              }
