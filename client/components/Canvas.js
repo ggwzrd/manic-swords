@@ -9,6 +9,8 @@ import Scoreboard from '../containers/Scoreboard'
 
 // helpers
 import { updatePlayer, currentPlayer, otherPlayer } from '../helpers/update-player-helper'
+
+// TODO not using cleanDisabledSword anymore??
 import { checkCollision, cleanDisabledSword } from '../helpers/game-helper'
 
 // models [still empty]
@@ -54,20 +56,47 @@ class Canvas extends React.Component {
         saveGame(game, {level: { speed: SPEED, title: titles[SPEED] }, swords: clientSwords})
         console.log('level changed')
       }, 30000);
-      // here we trigger the draw function for the first time
+      // here we trigger the draw functions for the first time
       // we should call this at least once to start the loop
       // to continuously trigger the drawPlayer and drawSwords functions
       this.drawPlayers()
       this.draw()
+      // same goes for updateSwords()
+      this.updateSwords()
     }
-    // Update swords when the hit something
-    //
+
     componentDidUpdate() {
       const { game } = this.props
 
+      // TODO we raise the speed with each update_game ??
       if(SPEED < 5){ SPEED = game.level.speed + 1 }
-      if(game.started){
-        // this.startCleaning.bind(this)()
+      // if(game.started){
+      //   // this.startCleaning.bind(this)()
+      // }
+    }
+
+    //TODO WIP it looks like the swords aren't updated now.
+    updateSwords() {
+      if(!player1.isDead) {
+        window.setTimeout(function(){
+          const collided = checkCollision(clientSwords, player1)
+          if(collided.player.hasOwnProperty('isHit')){
+             const snd = new Audio('../audio/hit.wav')
+             snd.play()
+             clientSwords = collided.swords
+
+             if (currentUser._id === playerOne.userId) {
+               saveGame(game, {swords: clientSwords, playerOne: collided.player })
+             }
+             if (currentUser._id === playerTwo.userId) {
+               saveGame(game, {swords: clientSwords, playerTwo: collided.player })
+             }
+          }
+          // we maken sure to feed the function back to itself
+          // so that we check for collisions and update the swords a couple times a second
+          // the timeframe cannot be to small, because that's too expensive
+          this.updateSwords()
+        }.bind(this), 300)
       }
     }
 
@@ -82,28 +111,11 @@ class Canvas extends React.Component {
       const ctx = this.refs.canvas.getContext('2d')
       ctx.clearRect(0,0,WIDTH,HEIGHT)
 
-
-      if(!player1.isDead) {
-        window.setTimeout(function(){
-          const collided = checkCollision(clientSwords, player1)
-          if(collided.player.hasOwnProperty('isHit')){
-  	   	     const snd = new Audio('../audio/hit.wav')
-             snd.play()
-             clientSwords = collided.swords
-
-             if (currentUser._id === playerOne.userId) {
-               saveGame(game, {swords: clientSwords, playerOne: collided.player })
-             }
-             if (currentUser._id === playerTwo.userId) {
-               saveGame(game, {swords: clientSwords, playerTwo: collided.player })
-             }
-          }
-        }.bind(this), 300);
-      }
       if(game.started && !game.ended) this.drawSwords()
 
       this.drawPlayers()
 
+      // here we feed the function back to itself
       window.requestAnimationFrame(this.draw.bind(this))
     }
 
