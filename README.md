@@ -15,7 +15,7 @@ WORK IN PROGRESS
 
 1. Dynamic drawing in HTML5 Canvas: updating each animation frame.
 2. Moving players synchronously in both user screens via POST server request and Socket IO.
-3. Constantly think about performances and how to improve it.
+3. Constantly taking into account performance and how to improve it.
 4. Full-stack JS application with NodeJS as Backend.
 5. Authorization using Feathers.
 6. Managing the data flow with React-redux.
@@ -47,6 +47,6 @@ Getting up and running is as easy as 1, 2, 3.
 
 ## Help
 
-For questions, suggestions or other remarks contact Giulio or Pim here on Github or create a pull request.
+For questions, suggestions or other remarks create a pull request or contact Giulio or Pim at heijdenpvd[at]gmail.com .
 For more information on all the things you can do with Feathers visit [docs.feathersjs.com](http://docs.feathersjs.com).
 
