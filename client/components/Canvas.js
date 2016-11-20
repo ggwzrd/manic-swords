@@ -48,6 +48,7 @@ class Canvas extends React.Component {
        // we draw the players for the first time
       const { game, saveGame } = this.props
       this.drawPlayers()
+      // TODO it is if though the payer is saved twice for each move
       window.addEventListener( 'keydown', function(event) {
         updatePlayer(this, event)
       }.bind(this))

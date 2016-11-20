@@ -42,6 +42,7 @@ export const savePlayer = (_self, newPlayer) => {
 
 }
 
+
 export const updatePlayer = (_self, event) => {
 
     const { saveGame, game } = _self.props
@@ -79,25 +80,6 @@ export const updatePlayer = (_self, event) => {
         })
         savePlayer(_self, newPlayerRight)
         return
-      // case 38:  // up 'wall' ? stop
-      //   const newPlayersUp = [player2, Object.assign({}, player1,
-      //     {position: {
-      //       x: positionX,
-      //       y: positionY <= 5 ? positionY : positionY - moveAmount
-      //     }
-      //   })]
-      //   saveGame(game, { players: newPlayersUp })
-      //   return
-      // case 40:  // down 'wall' ? stop
-      //   const newPlayersDown = [player2, Object.assign({}, player1,
-      //     {position: {
-      //
-      //       x: positionX,
-      //       y: positionY >= 440 ? positionY : positionY + moveAmount
-      //     }
-      //   })]
-      //   saveGame(game, { players: newPlayersDown })
-      // return
       default :
         return
     }
