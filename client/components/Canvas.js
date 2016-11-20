@@ -63,7 +63,7 @@ class Canvas extends React.Component {
 
       // here we update the level
       // but only if the game has not ended
-      if ( game.ended ? ) { return }
+      if ( ! game.ended ) { return }
       setInterval(function () {
         saveGame(game, {level: { speed: SPEED, title: titles[SPEED] }, swords: clientSwords})
         console.log('level changed')
