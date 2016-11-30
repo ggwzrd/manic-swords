@@ -59,6 +59,7 @@ class Canvas extends React.Component {
       this.drawPlayers()
       this.draw()
       // we also trigger the updateSwords function loop for the first time
+      // also when there is no playerTwo yet...
       this.updateSwords()
     }
     // Update swords when the hit something
@@ -81,6 +82,8 @@ class Canvas extends React.Component {
 
      const { playerOne, playerTwo } = game
      const player1 = currentPlayer(this)
+     console.log('updateSwords: isdead?')
+     debugger
        if(!player1.isDead) {
          window.setTimeout(function(){
            const collided = checkCollision(clientSwords, player1)

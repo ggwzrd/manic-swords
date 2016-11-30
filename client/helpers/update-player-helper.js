@@ -25,21 +25,18 @@ export const otherPlayer = (_self) => {
   // player.userId !== currentUser._id)[0]
 }
 
-export const savePlayer = (_self, newPlayer) => {
+export const savePlayer = (_self, newPosition ) => {
     // if the currentUser has created or joined the game this should return a player
     const { game, saveGame, currentUser } = _self.props
     const { playerOne, playerTwo } = game
-
+    console.log('update-player-helper: savePlayer')
+    debugger
     if (currentUser._id === playerOne.userId) {
-      saveGame(game, { playerOne: newPlayer })
+      saveGame(game, { playerOne: { position: newPosition } })
     }
     if (currentUser._id === playerTwo.userId) {
-      saveGame(game, { playerTwo: newPlayer })
+      saveGame(game, { playerTwo: { position: newPosition } })
     }
-
-    // return game.players.filter((player) =>
-    // player.userId === currentUser._id)[0]
-
 }
 
 export const updatePlayer = (_self, event) => {
@@ -49,7 +46,8 @@ export const updatePlayer = (_self, event) => {
     // player1 is the currentUser playing, so not necessarily playerOne
     const player1 = currentPlayer(_self)
     // const player2 = otherPlayer(_self)
-
+    console.log('update-player-helper: updatePlayer')
+    debugger
     if(!player1 || player1.isDead || !game.started){ return false }
 
     const positionX = player1.position.x
@@ -58,46 +56,23 @@ export const updatePlayer = (_self, event) => {
     const moveAmount = 22
 
     switch(event.keyCode){
-      case 37:  //left
-        const newPlayerLeft = Object.assign({}, player1,
-          { position:
-            {
-            // left 'wall'? go through
-            x: positionX <= -40 ? 760 : positionX - moveAmount,
-            y: positionY
-          }
-        })
-        savePlayer(_self, newPlayerLeft)
+      case 37:  // moving left
+        const newPositionLeft = {
+          // left 'wall'? go through
+          x: positionX <= -40 ? 760 : positionX - moveAmount,
+          y: positionY
+        }
+        savePlayer(_self, newPositionLeft)
         return
-      case 39:  // right
-        const newPlayerRight = Object.assign({}, player1,
-          { position: {
-            // right 'wall'? go through
-            x: positionX >= 760 ? -40 : positionX + moveAmount,
-            y: positionY
-          }
-        })
-        savePlayer(_self, newPlayerRight)
+      case 39:  // moving right
+        const newPositionRight = {
+          // right 'wall'? go through
+          x: positionX >= 760 ? -40 : positionX + moveAmount,
+          y: positionY
+        }
+        savePlayer(_self, newPositionRight)
         return
-      // case 38:  // up 'wall' ? stop
-      //   const newPlayersUp = [player2, Object.assign({}, player1,
-      //     {position: {
-      //       x: positionX,
-      //       y: positionY <= 5 ? positionY : positionY - moveAmount
-      //     }
-      //   })]
-      //   saveGame(game, { players: newPlayersUp })
-      //   return
-      // case 40:  // down 'wall' ? stop
-      //   const newPlayersDown = [player2, Object.assign({}, player1,
-      //     {position: {
-      //
-      //       x: positionX,
-      //       y: positionY >= 440 ? positionY : positionY + moveAmount
-      //     }
-      //   })]
-      //   saveGame(game, { players: newPlayersDown })
-      // return
+
       default :
         return
     }

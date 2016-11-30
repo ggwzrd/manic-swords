@@ -20,20 +20,20 @@ class Game extends Component {
   }
 
   isPlayer() {
-      const { game, currentUser } = this.props
-      const { playerOne, playerTwo } = game
-      const players = [playerOne]
+    const { game, currentUser } = this.props
+    const { playerOne, playerTwo } = game
+    const players = [playerOne]
 
-      !!playerTwo ? players.push(playerTwo) : null
+    !!playerTwo ? players.push(playerTwo) : null
 
-      return players.filter((player) =>
-        player.userId === currentUser._id).length > 0
+    return players.filter((player) =>
+      player.userId === currentUser._id).length > 0
   }
 
   canJoin() {
-      if (this.isPlayer()) { return false }
-      const { game } = this.props
-      return !!!game.playerTwo         // this determines the amount of players that can join the game
+    if (this.isPlayer()) { return false }
+    const { game } = this.props
+    return !!!game.playerTwo         // this determines the amount of players that can join the game
   }
 
   joinGame() {
