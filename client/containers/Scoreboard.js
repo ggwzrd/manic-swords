@@ -23,24 +23,18 @@ class Scoreboard extends Component {
    }
 
   componentDidMount() {
-        this.counter()
+      if (i === 6 ){
+      this.counter()
+    }
   }
 
   componentDidUpdate() {
 
         const { game } = this.props
 
-        // if ( !game.started && game.swords.length <= 0 ) {
-        //   // super()
-        //   this.state = {
-        //     timer: 6
-        //     }
-        // }
-        //
         console.log('Scoreboard: updated')
         const i = this.state.timer
         if (i === 6 ){
-          
           this.counter()
         }
   }
