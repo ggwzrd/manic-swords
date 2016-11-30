@@ -58,9 +58,10 @@ class Canvas extends React.Component {
       // to continuously trigger the drawPlayer and drawSwords functions
       this.drawPlayers()
       this.draw()
+      // we also trigger the updateSwords function loop for the first time
+      this.updateSwords()
     }
     // Update swords when the hit something
-    //
     componentDidUpdate() {
       const { game } = this.props
 
@@ -70,35 +71,48 @@ class Canvas extends React.Component {
       }
     }
 
-    
+
+    // taking changes from this commit in branch optimizing:
+    // https://github.com/giuliogallerini/manic-swords/commit/b4d238bf55d12ce484604e3a5e8e21a4d4df87b7
+
+    //TODO are the swords updated now?
+     updateSwords() {
+     const { game, saveGame, currentUser } = this.props
+
+     const { playerOne, playerTwo } = game
+     const player1 = currentPlayer(this)
+       if(!player1.isDead) {
+         window.setTimeout(function(){
+           const collided = checkCollision(clientSwords, player1)
+
+           if(collided.player.hasOwnProperty('isHit')){
+              const snd = new Audio('../audio/hit.wav')
+              snd.play()
+              clientSwords = collided.swords
+              console.log('collided!')
+              if (currentUser._id === playerOne.userId) {
+                saveGame(game, {swords: clientSwords, playerOne: { lifes: collided.player.lives-- } })
+              }
+              if (currentUser._id === playerTwo.userId) {
+                saveGame(game, {swords: clientSwords, playerTwo: { lifes: collided.player.lives-- } })
+              }
+          }
+          // we maken sure to feed the function back to itself
+          // so that we check for collisions and update the swords a couple times a second
+          // the timeframe cannot be to small, because that's too expensive
+          this.updateSwords()
+        }.bind(this), 300)
+      }
+    }
+
     // we continuously draw all swords and players
     draw(){
       const { game, saveGame, currentUser } = this.props
       const { playerOne, playerTwo } = game
 
-	    const player1 = currentPlayer(this)
-
       const ctx = this.refs.canvas.getContext('2d')
       ctx.clearRect(0,0,WIDTH,HEIGHT)
 
-
-      if(!player1.isDead) {
-        window.setTimeout(function(){
-          const collided = checkCollision(clientSwords, player1)
-          if(collided.player.hasOwnProperty('isHit')){
-  	   	     const snd = new Audio('../audio/hit.wav')
-             snd.play()
-             clientSwords = collided.swords
-
-             if (currentUser._id === playerOne.userId) {
-               saveGame(game, {swords: clientSwords, playerOne: collided.player })
-             }
-             if (currentUser._id === playerTwo.userId) {
-               saveGame(game, {swords: clientSwords, playerTwo: collided.player })
-             }
-          }
-        }.bind(this), 300);
-      }
       if(game.started && !game.ended) this.drawSwords()
 
       this.drawPlayers()
