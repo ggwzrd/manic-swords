@@ -14,7 +14,6 @@ import Canvas from '../components/Canvas'
 
 class Game extends Component {
   componentWillMount() {
-
     this.props.setGameId(this.props.routeParams.id)
     this.props.setUpGame()
   }
