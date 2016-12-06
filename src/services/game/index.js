@@ -9,6 +9,10 @@ module.exports = function() {
 
   const options = {
     Model: game,
+    // TODO set overwrite to false to see if this solves the patching issue, looks like it doesn't
+    // Feathersjs docs: overwrite (default: true) [optional] - Updates completely replace existing documents.
+    // question: is update service method with overwrite false the same as patch service method ??
+    overwrite: false,
     paginate: {
       default: 5,
       max: 25
