@@ -83,7 +83,7 @@ module.exports = function(options) {
     // hook.data.winner = updatedPlayers.map((player) => player._id).indexOf(winnerId)
 
 
-
+    //
     // old code
     // else{
     //   if(swords.length <= 0 && hook.data.started){
