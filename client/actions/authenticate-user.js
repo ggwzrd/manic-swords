@@ -15,7 +15,7 @@ const authenticateUser = (user) => {
 }
 
 export default (user) => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(resetFormErrors())
     // We're loading (communicating with the API asynchronously)
     dispatch(appLoading(true))

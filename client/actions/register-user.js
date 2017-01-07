@@ -7,7 +7,7 @@ import resetFormErrors from './reset-form-errors'
 const REGISTER_USER = 'REGISTER_USER'
 
 export default (user) => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(resetFormErrors())
     // We're loading (communicating with the API asynchronously)
     dispatch(appLoading(true))

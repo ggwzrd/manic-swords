@@ -31,12 +31,12 @@ let SPEED = 0
 class Canvas extends React.Component {
 
     componentWillMount(){
-        const { swords, level } = this.props.game
-        SPEED = 0
-        SPEED = level.speed
-        clientSwords = swords.map((sword) => {
-          return new Sword(sword, level)
-        })
+      const { swords, level } = this.props.game
+      SPEED = 0
+      SPEED = level.speed
+      clientSwords = swords.map((sword) => {
+        return new Sword(sword, level)
+      })
     }
 
     // we bind addEventListener to update the player position

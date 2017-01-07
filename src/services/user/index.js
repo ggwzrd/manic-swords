@@ -1,4 +1,4 @@
-'use strict';
+// src/services/user/index.js
 
 const service = require('feathers-mongoose');
 const user = require('./user-model');

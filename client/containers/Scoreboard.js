@@ -16,11 +16,11 @@ import { currentPlayer, otherPlayer } from '../helpers/update-player-helper'
 class Scoreboard extends Component {
 
   constructor() {
-         super()
-         this.state = {
-           timer: 6
-           }
-   }
+    super()
+    this.state = {
+     timer: 6
+    }
+  }
 
   componentDidMount() {
       if (i === 6 ){
@@ -30,13 +30,13 @@ class Scoreboard extends Component {
 
   componentDidUpdate() {
 
-        const { game } = this.props
+    const { game } = this.props
 
-        console.log('Scoreboard: updated')
-        const i = this.state.timer
-        if (i === 6 ){
-          this.counter()
-        }
+    console.log('Scoreboard: updated')
+    const i = this.state.timer
+    if (i === 6 ){
+      this.counter()
+    }
   }
 
   counter() {

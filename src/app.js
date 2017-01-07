@@ -14,27 +14,28 @@ const services = require('./services');
 
 const app = feathers();
 
-const configType = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
+const configType = process.env.NODE_ENV === 'production' ? 'prod' : 'dev'
 
 if (configType === 'dev') {
-  const webpack = require('webpack');
-  const config = require(`../webpack.config.${configType}.js`);
-  const compiler = webpack(config);
+  const webpack = require('webpack')
+  const config = require(`../webpack.config.${configType}.js`)
+  const compiler = webpack(config)
 
   app.use(require('webpack-dev-middleware')(compiler, {
-      noInfo: true,
+    noInfo: true,
     publicPath: config.output.publicPath
-  }));
+  }))
 
-  app.use(require('webpack-hot-middleware')(compiler));
+  app.use(require('webpack-hot-middleware')(compiler))
  }
 
-app.configure(configuration(path.join(__dirname, '..')));
+app.configure(configuration(path.join(__dirname, '..')))
 
 app.use(compress())
   .options('*', cors())
   .use(cors())
   .use(favicon( path.join(app.get('public'), 'favicon.ico') ))
+  // TODO two static locations?
   .use('/', serveStatic( app.get('public') ))
   .use('/static', serveStatic( app.get('public') ))
   .use(bodyParser.json())

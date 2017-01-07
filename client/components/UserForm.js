@@ -13,7 +13,6 @@ export class UserForm extends Component {
     super()
     this.state = {
       passwordError: false,
-
     }
   }
 
