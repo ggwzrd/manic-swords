@@ -43,7 +43,10 @@ Getting up and running is as easy as 1, 2, 3.
     npm start
     ```
     
-## Database Structure
+## TODO
+Use uWebSocket for better performance !
+
+See: https://docs.feathersjs.com/real-time/socket-io.html
 
 ## Help
 
