@@ -1,4 +1,4 @@
-# [Manic Swords](http://manic-swords.codaisseur.cloud/)
+# Manic Swords
 
 <img src="http://image-store.slidesharecdn.com/9ea4a56a-cf7b-4d5f-8675-87246127f9d1-large.png" width="600"/>
 
