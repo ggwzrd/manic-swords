@@ -1,5 +1,10 @@
 var path = require('path');
 var webpack = require('webpack');
+var alias = {};
+['EventPluginHub', 'EventConstants', 'EventPluginUtils', 'EventPropagators',
+ 'SyntheticUIEvent', 'CSSPropertyOperations', 'ViewportMetrics'].forEach(function(filename){
+    alias['react/lib/'+filename] = path.join(__dirname, './node_modules/react-dom/lib', filename);
+});
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
@@ -44,5 +49,6 @@ module.exports = {
     new webpack.ProvidePlugin({
       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
     })
-  ]
+  ],
+  resolve: { alias },
 };

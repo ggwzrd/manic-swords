@@ -1,8 +1,8 @@
 {
-  "name": "MemoryGame",
+  "name": "memory-game",
   "description": "Multiplayer Memory Game with React and FeathersJS.",
   "version": "0.0.0",
-  "homepage": "",
+  "homepage": "http://manicswords.giuliogallerini.com",
   "main": "src/",
   "keywords": [
     "feathers"
